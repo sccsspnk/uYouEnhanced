@@ -31,6 +31,7 @@
 #import "Tweaks/YouTubeHeader/YTAlertView.h"
 #import "Tweaks/YouTubeHeader/YTIMenuConditionalServiceItemRenderer.h"
 #import "Tweaks/YouTubeHeader/YTPivotBarItemView.h"
+#import "Tweaks/YouTubeHeader/YTBrowseViewController.h"
 #import "Tweaks/YouTubeHeader/YTVideoWithContextNode.h" // YouTube-X
 #import "Tweaks/YouTubeHeader/ELMCellNode.h" // YouTube-X
 #import "Tweaks/YouTubeHeader/ELMNodeController.h" // YouTube-X
