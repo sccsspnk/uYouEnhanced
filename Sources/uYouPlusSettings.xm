@@ -91,8 +91,11 @@ static int contrastMode() {
         return 0;
     }
 }
-static int appVersionSpoofer() {
+static int appVersionSpoofer() { // App Version Spoofer
     return [[NSUserDefaults standardUserDefaults] integerForKey:@"versionSpoofer"];
+}
+static int getNotificationIconStyle() { // Notifications Tab
+    return [[NSUserDefaults standardUserDefaults] integerForKey:@"notificationIconStyle"];
 }
 static const NSInteger uYouPlusSection = 500;
 
@@ -101,7 +104,6 @@ static const NSInteger uYouPlusSection = 500;
 @end
 
 extern NSBundle *uYouPlusBundle();
-extern int getNotificationIconStyle(void); // Notifications Tab
 
 // Settings Search Bar
 %hook YTSettingsViewController
