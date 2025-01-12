@@ -21,9 +21,6 @@ NSBundle *tweakBundle = uYouPlusBundle();
 static int getNotificationIconStyle() {
     return [[NSUserDefaults standardUserDefaults] integerForKey:@"notificationIconStyle"];
 }
-static BOOL useDefaultStyle() {
-    return IS_ENABLED(@"enableNotificationIconStyle") && getNotificationIconStyle() == 0;
-}
 static BOOL useThinOutlineStyle() {
     return IS_ENABLED(@"enableNotificationIconStyle") && getNotificationIconStyle() == 1;
 }
