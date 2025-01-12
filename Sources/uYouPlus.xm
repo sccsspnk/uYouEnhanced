@@ -17,20 +17,6 @@ NSBundle *uYouPlusBundle() {
 NSBundle *tweakBundle = uYouPlusBundle();
 //
 
-// Notifications Tab nostalgic customization
-static BOOL useDefaultStyle() {
-    return IS_ENABLED(@"enableNotificationIconStyle") && getNotificationIconStyle() == 0;
-}
-static BOOL useThinOutlineStyle() {
-    return IS_ENABLED(@"enableNotificationIconStyle") && getNotificationIconStyle() == 1;
-}
-static BOOL usePre2020Style() {
-    return IS_ENABLED(@"enableNotificationIconStyle") && getNotificationIconStyle() == 2;
-}
-static BOOL useInboxStyle() {
-    return IS_ENABLED(@"enableNotificationIconStyle") && getNotificationIconStyle() == 3;
-}
-
 // Notifications Tab - @arichornlover & @dayanch96
 %group gShowNotificationsTab
 %hook YTAppPivotBarItemStyle
