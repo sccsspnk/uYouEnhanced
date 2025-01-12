@@ -71,7 +71,6 @@
     UICollectionViewCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:@"Cell" forIndexPath:indexPath];
     UIImageView *iconView = [[UIImageView alloc] initWithFrame:cell.contentView.bounds];
     YTIPivotBarItemRenderer *itemRenderer = self.pivotBarItems[indexPath.row];
-    iconView.image = [self imageFromYTIIcon:itemRenderer.icon];
     iconView.tintColor = [UIColor whiteColor];
     iconView.contentMode = UIViewContentModeScaleAspectFit;
     [cell.contentView addSubview:iconView];
