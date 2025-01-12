@@ -101,6 +101,7 @@ static const NSInteger uYouPlusSection = 500;
 @end
 
 extern NSBundle *uYouPlusBundle();
+extern int getNotificationIconStyle(void); // Notifications Tab
 
 // Settings Search Bar
 %hook YTSettingsViewController
