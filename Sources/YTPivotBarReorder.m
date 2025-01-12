@@ -45,8 +45,7 @@
         YTIPivotBarRenderer *pivotBarRenderer = [guideRenderers pivotBarRenderer];
         for (YTIPivotBarSupportedRenderers *renderer in [pivotBarRenderer itemsArray]) {
             YTIPivotBarItemRenderer *itemRenderer = [renderer pivotBarItemRenderer];
-            NSString *title = itemRenderer.title;
-            [activeTabs addObject:title];
+            [activeTabs addObject:itemRenderer];
         }
     }
     
@@ -61,7 +60,7 @@
 - (UICollectionViewCell *)collectionView:(UICollectionView *)collectionView cellForItemAtIndexPath:(NSIndexPath *)indexPath {
     UICollectionViewCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:@"Cell" forIndexPath:indexPath];
     UILabel *label = [[UILabel alloc] initWithFrame:cell.contentView.bounds];
-    label.text = self.pivotBarItems[indexPath.row];
+    label.text = [self.pivotBarItems[indexPath.row] string];
     label.textAlignment = NSTextAlignmentCenter;
     [cell.contentView addSubview:label];
     return cell;
