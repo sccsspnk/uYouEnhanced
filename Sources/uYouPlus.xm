@@ -17,13 +17,42 @@ NSBundle *uYouPlusBundle() {
 NSBundle *tweakBundle = uYouPlusBundle();
 //
 
+// Notifications Tab nostalgic customization
+static BOOL useDefaultStyle() {
+    return IS_ENABLED(@"enableNotificationIconStyle") && getNotificationIconStyle() == 0;
+}
+static BOOL useThinOutlineStyle() {
+    return IS_ENABLED(@"enableNotificationIconStyle") && getNotificationIconStyle() == 1;
+}
+static BOOL usePre2020Style() {
+    return IS_ENABLED(@"enableNotificationIconStyle") && getNotificationIconStyle() == 2;
+}
+static BOOL useInboxStyle() {
+    return IS_ENABLED(@"enableNotificationIconStyle") && getNotificationIconStyle() == 3;
+}
+
 // Notifications Tab - @arichornlover & @dayanch96
 %group gShowNotificationsTab
 %hook YTAppPivotBarItemStyle
 - (UIImage *)pivotBarItemIconImageWithIconType:(int)type color:(UIColor *)color useNewIcons:(BOOL)isNew selected:(BOOL)isSelected {
-    NSString *imageName = isSelected ? @"notifications_selected" : @"notifications_unselected";
+    NSString *imageName;
+    UIColor *iconColor;
+    if (useThinOutlineStyle()) {
+        imageName = isSelected ? @"notifications_selected" : @"notifications_unselected_24pt";
+        iconColor = [%c(YTColor) white1];
+    } else if (usePre2020Style()) {
+        imageName = @"notifications_selected";
+        iconColor = isSelected ? [%c(YTColor) white1] : [UIColor grayColor];
+    } else if (useInboxStyle()) {
+        imageName = @"inbox_selected";
+        iconColor = isSelected ? [%c(YTColor) white1] : [UIColor grayColor];
+    } else {
+        imageName = isSelected ? @"notifications_selected" : @"notifications_unselected";
+        iconColor = [%c(YTColor) white1];
+    }
     NSString *imagePath = [tweakBundle pathForResource:imageName ofType:@"png" inDirectory:@"UI"];
     UIImage *image = [UIImage imageWithContentsOfFile:imagePath];
+    image = [%c(QTMIcon) tintImage:image color:iconColor];
     return type == 1 ? image : %orig;
 }
 %end
@@ -41,7 +70,12 @@ NSBundle *tweakBundle = uYouPlusBundle();
         [icon setIconType:YT_NOTIFICATIONS];
         [itemBar setNavigationEndpoint:command];
 
-        YTIFormattedString *formatString = [%c(YTIFormattedString) formattedStringWithString:@"Notifications"];
+        YTIFormattedString *formatString;
+        if (useInboxStyle()) {
+            formatString = [%c(YTIFormattedString) formattedStringWithString:@"Inbox"];
+        } else {
+            formatString = [%c(YTIFormattedString) formattedStringWithString:@"Notifications"];
+        }
         [itemBar setTitle:formatString];
 
         YTIPivotBarSupportedRenderers *barSupport = [[%c(YTIPivotBarSupportedRenderers) alloc] init];
