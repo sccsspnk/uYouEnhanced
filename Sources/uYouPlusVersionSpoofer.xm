@@ -149,7 +149,7 @@ static NSString* getAppVersionForSpoofedVersion(int spoofedVersion) {
             return versionMappings[i].appVersion;
         }
     }
-    return %orig;
+    return nil;
 }
 
 %hook YTVersionUtils
