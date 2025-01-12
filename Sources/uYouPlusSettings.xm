@@ -10,6 +10,13 @@
 
 #define SECTION_HEADER(s) [sectionItems addObject:[%c(YTSettingsSectionItem) itemWithTitle:@"\t" titleDescription:[s uppercaseString] accessibilityIdentifier:nil detailTextBlock:nil selectBlock:^BOOL (YTSettingsCell *cell, NSUInteger sectionItemIndex) { return NO; }]]
 
+#define SPOOFER_VERSION(version, index) \
+    [YTSettingsSectionItemClass checkmarkItemWithTitle:version titleDescription:nil selectBlock:^BOOL (YTSettingsCell *cell, NSUInteger arg1) { \
+        [[NSUserDefaults standardUserDefaults] setInteger:index forKey:@"versionSpoofer"]; \
+        [settingsViewController reloadData]; \
+        return YES; \
+    }]
+
 // Basic Switch
 #define SWITCH(title, description, key, ...) \
     [sectionItems addObject:[%c(YTSettingsSectionItem) \
@@ -933,640 +940,133 @@ NSString *cacheDescription = [NSString stringWithFormat:@"%@", GetCacheSize()];
         }
         selectBlock:^BOOL (YTSettingsCell *cell, NSUInteger arg1) {
             NSArray <YTSettingsSectionItem *> *rows = @[
-                [YTSettingsSectionItemClass checkmarkItemWithTitle:@"v19.49.7" titleDescription:nil selectBlock:^BOOL (YTSettingsCell *cell, NSUInteger arg1) {
-                    [[NSUserDefaults standardUserDefaults] setInteger:0 forKey:@"versionSpoofer"];
-                    [settingsViewController reloadData];
-                    return YES;
-                }],
-                [YTSettingsSectionItemClass checkmarkItemWithTitle:@"v19.49.5" titleDescription:nil selectBlock:^BOOL (YTSettingsCell *cell, NSUInteger arg1) {
-                    [[NSUserDefaults standardUserDefaults] setInteger:1 forKey:@"versionSpoofer"];
-                    [settingsViewController reloadData];
-                    return YES;
-                }],
-                [YTSettingsSectionItemClass checkmarkItemWithTitle:@"v19.49.3" titleDescription:nil selectBlock:^BOOL (YTSettingsCell *cell, NSUInteger arg1) {
-                    [[NSUserDefaults standardUserDefaults] setInteger:2 forKey:@"versionSpoofer"];
-                    [settingsViewController reloadData];
-                    return YES;
-                }],
-                [YTSettingsSectionItemClass checkmarkItemWithTitle:@"v19.47.7" titleDescription:nil selectBlock:^BOOL (YTSettingsCell *cell, NSUInteger arg1) {
-                    [[NSUserDefaults standardUserDefaults] setInteger:3 forKey:@"versionSpoofer"];
-                    [settingsViewController reloadData];
-                    return YES;
-                }],
-                [YTSettingsSectionItemClass checkmarkItemWithTitle:@"v19.46.3" titleDescription:nil selectBlock:^BOOL (YTSettingsCell *cell, NSUInteger arg1) {
-                    [[NSUserDefaults standardUserDefaults] setInteger:4 forKey:@"versionSpoofer"];
-                    [settingsViewController reloadData];
-                    return YES;
-                }],
-                [YTSettingsSectionItemClass checkmarkItemWithTitle:@"v19.45.4" titleDescription:nil selectBlock:^BOOL (YTSettingsCell *cell, NSUInteger arg1) {
-                    [[NSUserDefaults standardUserDefaults] setInteger:5 forKey:@"versionSpoofer"];
-                    [settingsViewController reloadData];
-                    return YES;
-                }],
-                [YTSettingsSectionItemClass checkmarkItemWithTitle:@"v19.44.4" titleDescription:nil selectBlock:^BOOL (YTSettingsCell *cell, NSUInteger arg1) {
-                    [[NSUserDefaults standardUserDefaults] setInteger:6 forKey:@"versionSpoofer"];
-                    [settingsViewController reloadData];
-                    return YES;
-                }],
-                [YTSettingsSectionItemClass checkmarkItemWithTitle:@"v19.43.2" titleDescription:nil selectBlock:^BOOL (YTSettingsCell *cell, NSUInteger arg1) {
-                    [[NSUserDefaults standardUserDefaults] setInteger:7 forKey:@"versionSpoofer"];
-                    [settingsViewController reloadData];
-                    return YES;
-                }],
-                [YTSettingsSectionItemClass checkmarkItemWithTitle:@"v19.42.1" titleDescription:nil selectBlock:^BOOL (YTSettingsCell *cell, NSUInteger arg1) {
-                    [[NSUserDefaults standardUserDefaults] setInteger:8 forKey:@"versionSpoofer"];
-                    [settingsViewController reloadData];
-                    return YES;
-                }],
-                [YTSettingsSectionItemClass checkmarkItemWithTitle:@"v19.41.3" titleDescription:nil selectBlock:^BOOL (YTSettingsCell *cell, NSUInteger arg1) {
-                    [[NSUserDefaults standardUserDefaults] setInteger:9 forKey:@"versionSpoofer"];
-                    [settingsViewController reloadData];
-                    return YES;
-                }],
-                [YTSettingsSectionItemClass checkmarkItemWithTitle:@"v19.40.4" titleDescription:nil selectBlock:^BOOL (YTSettingsCell *cell, NSUInteger arg1) {
-                    [[NSUserDefaults standardUserDefaults] setInteger:10 forKey:@"versionSpoofer"];
-                    [settingsViewController reloadData];
-                    return YES;
-                }],
-                [YTSettingsSectionItemClass checkmarkItemWithTitle:@"v19.39.1" titleDescription:nil selectBlock:^BOOL (YTSettingsCell *cell, NSUInteger arg1) {
-                    [[NSUserDefaults standardUserDefaults] setInteger:11 forKey:@"versionSpoofer"];
-                    [settingsViewController reloadData];
-                    return YES;
-                }],
-                [YTSettingsSectionItemClass checkmarkItemWithTitle:@"v19.38.2" titleDescription:nil selectBlock:^BOOL (YTSettingsCell *cell, NSUInteger arg1) {
-                    [[NSUserDefaults standardUserDefaults] setInteger:12 forKey:@"versionSpoofer"];
-                    [settingsViewController reloadData];
-                    return YES;
-                }],
-                [YTSettingsSectionItemClass checkmarkItemWithTitle:@"v19.37.2" titleDescription:nil selectBlock:^BOOL (YTSettingsCell *cell, NSUInteger arg1) {
-                    [[NSUserDefaults standardUserDefaults] setInteger:13 forKey:@"versionSpoofer"];
-                    [settingsViewController reloadData];
-                    return YES;
-                }],
-                [YTSettingsSectionItemClass checkmarkItemWithTitle:@"v19.36.1" titleDescription:nil selectBlock:^BOOL (YTSettingsCell *cell, NSUInteger arg1) {
-                    [[NSUserDefaults standardUserDefaults] setInteger:14 forKey:@"versionSpoofer"];
-                    [settingsViewController reloadData];
-                    return YES;
-                }],
-                [YTSettingsSectionItemClass checkmarkItemWithTitle:@"v19.35.3" titleDescription:nil selectBlock:^BOOL (YTSettingsCell *cell, NSUInteger arg1) {
-                    [[NSUserDefaults standardUserDefaults] setInteger:15 forKey:@"versionSpoofer"];
-                    [settingsViewController reloadData];
-                    return YES;
-                }],
-                [YTSettingsSectionItemClass checkmarkItemWithTitle:@"v19.34.2" titleDescription:nil selectBlock:^BOOL (YTSettingsCell *cell, NSUInteger arg1) {
-                    [[NSUserDefaults standardUserDefaults] setInteger:16 forKey:@"versionSpoofer"];
-                    [settingsViewController reloadData];
-                    return YES;
-                }],
-                [YTSettingsSectionItemClass checkmarkItemWithTitle:@"v19.33.2" titleDescription:nil selectBlock:^BOOL (YTSettingsCell *cell, NSUInteger arg1) {
-                    [[NSUserDefaults standardUserDefaults] setInteger:17 forKey:@"versionSpoofer"];
-                    [settingsViewController reloadData];
-                    return YES;
-                }],
-                [YTSettingsSectionItemClass checkmarkItemWithTitle:@"v19.32.8" titleDescription:nil selectBlock:^BOOL (YTSettingsCell *cell, NSUInteger arg1) {
-                    [[NSUserDefaults standardUserDefaults] setInteger:18 forKey:@"versionSpoofer"];
-                    [settingsViewController reloadData];
-                    return YES;
-                }],
-                [YTSettingsSectionItemClass checkmarkItemWithTitle:@"v19.32.6" titleDescription:nil selectBlock:^BOOL (YTSettingsCell *cell, NSUInteger arg1) {
-                    [[NSUserDefaults standardUserDefaults] setInteger:19 forKey:@"versionSpoofer"];
-                    [settingsViewController reloadData];
-                    return YES;
-                }],
-                [YTSettingsSectionItemClass checkmarkItemWithTitle:@"v19.31.4" titleDescription:nil selectBlock:^BOOL (YTSettingsCell *cell, NSUInteger arg1) {
-                    [[NSUserDefaults standardUserDefaults] setInteger:20 forKey:@"versionSpoofer"];
-                    [settingsViewController reloadData];
-                    return YES;
-                }],
-                [YTSettingsSectionItemClass checkmarkItemWithTitle:@"v19.30.2" titleDescription:nil selectBlock:^BOOL (YTSettingsCell *cell, NSUInteger arg1) {
-                    [[NSUserDefaults standardUserDefaults] setInteger:21 forKey:@"versionSpoofer"];
-                    [settingsViewController reloadData];
-                    return YES;
-                }],
-                [YTSettingsSectionItemClass checkmarkItemWithTitle:@"v19.29.1" titleDescription:nil selectBlock:^BOOL (YTSettingsCell *cell, NSUInteger arg1) {
-                    [[NSUserDefaults standardUserDefaults] setInteger:22 forKey:@"versionSpoofer"];
-                    [settingsViewController reloadData];
-                    return YES;
-                }],
-                [YTSettingsSectionItemClass checkmarkItemWithTitle:@"v19.28.1" titleDescription:nil selectBlock:^BOOL (YTSettingsCell *cell, NSUInteger arg1) {
-                    [[NSUserDefaults standardUserDefaults] setInteger:23 forKey:@"versionSpoofer"];
-                    [settingsViewController reloadData];
-                    return YES;
-                }],
-                [YTSettingsSectionItemClass checkmarkItemWithTitle:@"v19.26.5" titleDescription:nil selectBlock:^BOOL (YTSettingsCell *cell, NSUInteger arg1) {
-                    [[NSUserDefaults standardUserDefaults] setInteger:24 forKey:@"versionSpoofer"];
-                    [settingsViewController reloadData];
-                    return YES;
-                }],
-                [YTSettingsSectionItemClass checkmarkItemWithTitle:@"v19.25.4" titleDescription:nil selectBlock:^BOOL (YTSettingsCell *cell, NSUInteger arg1) {
-                    [[NSUserDefaults standardUserDefaults] setInteger:25 forKey:@"versionSpoofer"];
-                    [settingsViewController reloadData];
-                    return YES;
-                }],
-                [YTSettingsSectionItemClass checkmarkItemWithTitle:@"v19.25.3" titleDescription:nil selectBlock:^BOOL (YTSettingsCell *cell, NSUInteger arg1) {
-                    [[NSUserDefaults standardUserDefaults] setInteger:26 forKey:@"versionSpoofer"];
-                    [settingsViewController reloadData];
-                    return YES;
-                }],
-                [YTSettingsSectionItemClass checkmarkItemWithTitle:@"v19.24.3" titleDescription:nil selectBlock:^BOOL (YTSettingsCell *cell, NSUInteger arg1) {
-                    [[NSUserDefaults standardUserDefaults] setInteger:27 forKey:@"versionSpoofer"];
-                    [settingsViewController reloadData];
-                    return YES;
-                }],
-                [YTSettingsSectionItemClass checkmarkItemWithTitle:@"v19.24.2" titleDescription:nil selectBlock:^BOOL (YTSettingsCell *cell, NSUInteger arg1) {
-                    [[NSUserDefaults standardUserDefaults] setInteger:28 forKey:@"versionSpoofer"];
-                    [settingsViewController reloadData];
-                    return YES;
-                }],
-                [YTSettingsSectionItemClass checkmarkItemWithTitle:@"v19.23.3" titleDescription:nil selectBlock:^BOOL (YTSettingsCell *cell, NSUInteger arg1) {
-                    [[NSUserDefaults standardUserDefaults] setInteger:29 forKey:@"versionSpoofer"];
-                    [settingsViewController reloadData];
-                    return YES;
-                }],
-                [YTSettingsSectionItemClass checkmarkItemWithTitle:@"v19.22.6" titleDescription:nil selectBlock:^BOOL (YTSettingsCell *cell, NSUInteger arg1) {
-                    [[NSUserDefaults standardUserDefaults] setInteger:30 forKey:@"versionSpoofer"];
-                    [settingsViewController reloadData];
-                    return YES;
-                }],
-                [YTSettingsSectionItemClass checkmarkItemWithTitle:@"v19.22.3" titleDescription:nil selectBlock:^BOOL (YTSettingsCell *cell, NSUInteger arg1) {
-                    [[NSUserDefaults standardUserDefaults] setInteger:31 forKey:@"versionSpoofer"];
-                    [settingsViewController reloadData];
-                    return YES;
-                }],
-                [YTSettingsSectionItemClass checkmarkItemWithTitle:@"v19.21.3" titleDescription:nil selectBlock:^BOOL (YTSettingsCell *cell, NSUInteger arg1) {
-                    [[NSUserDefaults standardUserDefaults] setInteger:32 forKey:@"versionSpoofer"];
-                    [settingsViewController reloadData];
-                    return YES;
-                }],
-                [YTSettingsSectionItemClass checkmarkItemWithTitle:@"v19.21.2" titleDescription:nil selectBlock:^BOOL (YTSettingsCell *cell, NSUInteger arg1) {
-                    [[NSUserDefaults standardUserDefaults] setInteger:33 forKey:@"versionSpoofer"];
-                    [settingsViewController reloadData];
-                    return YES;
-                }],
-                [YTSettingsSectionItemClass checkmarkItemWithTitle:@"v19.20.2" titleDescription:nil selectBlock:^BOOL (YTSettingsCell *cell, NSUInteger arg1) {
-                    [[NSUserDefaults standardUserDefaults] setInteger:34 forKey:@"versionSpoofer"];
-                    [settingsViewController reloadData];
-                    return YES;
-                }],
-                [YTSettingsSectionItemClass checkmarkItemWithTitle:@"v19.19.7" titleDescription:nil selectBlock:^BOOL (YTSettingsCell *cell, NSUInteger arg1) {
-                    [[NSUserDefaults standardUserDefaults] setInteger:35 forKey:@"versionSpoofer"];
-                    [settingsViewController reloadData];
-                    return YES;
-                }],
-                [YTSettingsSectionItemClass checkmarkItemWithTitle:@"v19.19.5" titleDescription:nil selectBlock:^BOOL (YTSettingsCell *cell, NSUInteger arg1) {
-                    [[NSUserDefaults standardUserDefaults] setInteger:36 forKey:@"versionSpoofer"];
-                    [settingsViewController reloadData];
-                    return YES;
-                }],
-                [YTSettingsSectionItemClass checkmarkItemWithTitle:@"v19.18.2" titleDescription:nil selectBlock:^BOOL (YTSettingsCell *cell, NSUInteger arg1) {
-                    [[NSUserDefaults standardUserDefaults] setInteger:37 forKey:@"versionSpoofer"];
-                    [settingsViewController reloadData];
-                    return YES;
-                }],
-                [YTSettingsSectionItemClass checkmarkItemWithTitle:@"v19.17.2" titleDescription:nil selectBlock:^BOOL (YTSettingsCell *cell, NSUInteger arg1) {
-                    [[NSUserDefaults standardUserDefaults] setInteger:38 forKey:@"versionSpoofer"];
-                    [settingsViewController reloadData];
-                    return YES;
-                }],
-                [YTSettingsSectionItemClass checkmarkItemWithTitle:@"v19.16.3" titleDescription:nil selectBlock:^BOOL (YTSettingsCell *cell, NSUInteger arg1) {
-                    [[NSUserDefaults standardUserDefaults] setInteger:39 forKey:@"versionSpoofer"];
-                    [settingsViewController reloadData];
-                    return YES;
-                }],
-                [YTSettingsSectionItemClass checkmarkItemWithTitle:@"v19.15.1" titleDescription:nil selectBlock:^BOOL (YTSettingsCell *cell, NSUInteger arg1) {
-                    [[NSUserDefaults standardUserDefaults] setInteger:40 forKey:@"versionSpoofer"];
-                    [settingsViewController reloadData];
-                    return YES;
-                }],
-                [YTSettingsSectionItemClass checkmarkItemWithTitle:@"v19.14.3" titleDescription:nil selectBlock:^BOOL (YTSettingsCell *cell, NSUInteger arg1) {
-                    [[NSUserDefaults standardUserDefaults] setInteger:41 forKey:@"versionSpoofer"];
-                    [settingsViewController reloadData];
-                    return YES;
-                }],
-                [YTSettingsSectionItemClass checkmarkItemWithTitle:@"v19.14.2" titleDescription:nil selectBlock:^BOOL (YTSettingsCell *cell, NSUInteger arg1) {
-                    [[NSUserDefaults standardUserDefaults] setInteger:42 forKey:@"versionSpoofer"];
-                    [settingsViewController reloadData];
-                    return YES;
-                }],
-                [YTSettingsSectionItemClass checkmarkItemWithTitle:@"v19.13.1" titleDescription:nil selectBlock:^BOOL (YTSettingsCell *cell, NSUInteger arg1) {
-                    [[NSUserDefaults standardUserDefaults] setInteger:43 forKey:@"versionSpoofer"];
-                    [settingsViewController reloadData];
-                    return YES;
-                }],
-                [YTSettingsSectionItemClass checkmarkItemWithTitle:@"v19.12.3" titleDescription:nil selectBlock:^BOOL (YTSettingsCell *cell, NSUInteger arg1) {
-                    [[NSUserDefaults standardUserDefaults] setInteger:44 forKey:@"versionSpoofer"];
-                    [settingsViewController reloadData];
-                    return YES;
-                }],
-                [YTSettingsSectionItemClass checkmarkItemWithTitle:@"v19.10.7" titleDescription:nil selectBlock:^BOOL (YTSettingsCell *cell, NSUInteger arg1) {
-                    [[NSUserDefaults standardUserDefaults] setInteger:45 forKey:@"versionSpoofer"];
-                    [settingsViewController reloadData];
-                    return YES;
-                }],
-                [YTSettingsSectionItemClass checkmarkItemWithTitle:@"v19.10.6" titleDescription:nil selectBlock:^BOOL (YTSettingsCell *cell, NSUInteger arg1) {
-                    [[NSUserDefaults standardUserDefaults] setInteger:46 forKey:@"versionSpoofer"];
-                    [settingsViewController reloadData];
-                    return YES;
-                }],
-                [YTSettingsSectionItemClass checkmarkItemWithTitle:@"v19.10.5" titleDescription:nil selectBlock:^BOOL (YTSettingsCell *cell, NSUInteger arg1) {
-                    [[NSUserDefaults standardUserDefaults] setInteger:47 forKey:@"versionSpoofer"];
-                    [settingsViewController reloadData];
-                    return YES;
-                }],
-                [YTSettingsSectionItemClass checkmarkItemWithTitle:@"v19.09.4" titleDescription:nil selectBlock:^BOOL (YTSettingsCell *cell, NSUInteger arg1) {
-                    [[NSUserDefaults standardUserDefaults] setInteger:48 forKey:@"versionSpoofer"];
-                    [settingsViewController reloadData];
-                    return YES;
-                }],
-                [YTSettingsSectionItemClass checkmarkItemWithTitle:@"v19.09.3" titleDescription:nil selectBlock:^BOOL (YTSettingsCell *cell, NSUInteger arg1) {
-                    [[NSUserDefaults standardUserDefaults] setInteger:49 forKey:@"versionSpoofer"];
-                    [settingsViewController reloadData];
-                    return YES;
-                }],
-                [YTSettingsSectionItemClass checkmarkItemWithTitle:@"v19.08.2" titleDescription:nil selectBlock:^BOOL (YTSettingsCell *cell, NSUInteger arg1) {
-                    [[NSUserDefaults standardUserDefaults] setInteger:50 forKey:@"versionSpoofer"];
-                    [settingsViewController reloadData];
-                    return YES;
-                }],
-                [YTSettingsSectionItemClass checkmarkItemWithTitle:@"v19.07.5" titleDescription:nil selectBlock:^BOOL (YTSettingsCell *cell, NSUInteger arg1) {
-                    [[NSUserDefaults standardUserDefaults] setInteger:51 forKey:@"versionSpoofer"];
-                    [settingsViewController reloadData];
-                    return YES;
-                }],
-                [YTSettingsSectionItemClass checkmarkItemWithTitle:@"v19.07.4" titleDescription:nil selectBlock:^BOOL (YTSettingsCell *cell, NSUInteger arg1) {
-                    [[NSUserDefaults standardUserDefaults] setInteger:52 forKey:@"versionSpoofer"];
-                    [settingsViewController reloadData];
-                    return YES;
-                }],
-                [YTSettingsSectionItemClass checkmarkItemWithTitle:@"v19.06.2" titleDescription:nil selectBlock:^BOOL (YTSettingsCell *cell, NSUInteger arg1) {
-                    [[NSUserDefaults standardUserDefaults] setInteger:53 forKey:@"versionSpoofer"];
-                    [settingsViewController reloadData];
-                    return YES;
-                }],
-                [YTSettingsSectionItemClass checkmarkItemWithTitle:@"v19.05.5" titleDescription:nil selectBlock:^BOOL (YTSettingsCell *cell, NSUInteger arg1) {
-                    [[NSUserDefaults standardUserDefaults] setInteger:54 forKey:@"versionSpoofer"];
-                    [settingsViewController reloadData];
-                    return YES;
-                }],
-                [YTSettingsSectionItemClass checkmarkItemWithTitle:@"v19.05.3" titleDescription:nil selectBlock:^BOOL (YTSettingsCell *cell, NSUInteger arg1) {
-                    [[NSUserDefaults standardUserDefaults] setInteger:55 forKey:@"versionSpoofer"];
-                    [settingsViewController reloadData];
-                    return YES;
-                }],
-                [YTSettingsSectionItemClass checkmarkItemWithTitle:@"v19.04.3" titleDescription:nil selectBlock:^BOOL (YTSettingsCell *cell, NSUInteger arg1) {
-                    [[NSUserDefaults standardUserDefaults] setInteger:56 forKey:@"versionSpoofer"];
-                    [settingsViewController reloadData];
-                    return YES;
-                }],
-                [YTSettingsSectionItemClass checkmarkItemWithTitle:@"v19.03.2" titleDescription:nil selectBlock:^BOOL (YTSettingsCell *cell, NSUInteger arg1) {
-                    [[NSUserDefaults standardUserDefaults] setInteger:57 forKey:@"versionSpoofer"];
-                    [settingsViewController reloadData];
-                    return YES;
-                }],
-                [YTSettingsSectionItemClass checkmarkItemWithTitle:@"v19.02.1" titleDescription:nil selectBlock:^BOOL (YTSettingsCell *cell, NSUInteger arg1) {
-                    [[NSUserDefaults standardUserDefaults] setInteger:58 forKey:@"versionSpoofer"];
-                    [settingsViewController reloadData];
-                    return YES;
-                }],
-                [YTSettingsSectionItemClass checkmarkItemWithTitle:@"v19.01.1" titleDescription:nil selectBlock:^BOOL (YTSettingsCell *cell, NSUInteger arg1) {
-                    [[NSUserDefaults standardUserDefaults] setInteger:59 forKey:@"versionSpoofer"];
-                    [settingsViewController reloadData];
-                    return YES;
-                }],
-                [YTSettingsSectionItemClass checkmarkItemWithTitle:@"v18.49.3" titleDescription:nil selectBlock:^BOOL (YTSettingsCell *cell, NSUInteger arg1) {
-                    [[NSUserDefaults standardUserDefaults] setInteger:60 forKey:@"versionSpoofer"];
-                    [settingsViewController reloadData];
-                    return YES;
-                }],
-                [YTSettingsSectionItemClass checkmarkItemWithTitle:@"v18.48.3" titleDescription:nil selectBlock:^BOOL (YTSettingsCell *cell, NSUInteger arg1) {
-                    [[NSUserDefaults standardUserDefaults] setInteger:61 forKey:@"versionSpoofer"];
-                    [settingsViewController reloadData];
-                    return YES;
-                }],
-                [YTSettingsSectionItemClass checkmarkItemWithTitle:@"v18.46.3" titleDescription:nil selectBlock:^BOOL (YTSettingsCell *cell, NSUInteger arg1) {
-                    [[NSUserDefaults standardUserDefaults] setInteger:62 forKey:@"versionSpoofer"];
-                    [settingsViewController reloadData];
-                    return YES;
-                }],
-                [YTSettingsSectionItemClass checkmarkItemWithTitle:@"v18.45.2" titleDescription:nil selectBlock:^BOOL (YTSettingsCell *cell, NSUInteger arg1) {
-                    [[NSUserDefaults standardUserDefaults] setInteger:63 forKey:@"versionSpoofer"];
-                    [settingsViewController reloadData];
-                    return YES;
-                }],
-                [YTSettingsSectionItemClass checkmarkItemWithTitle:@"v18.44.3" titleDescription:nil selectBlock:^BOOL (YTSettingsCell *cell, NSUInteger arg1) {
-                    [[NSUserDefaults standardUserDefaults] setInteger:64 forKey:@"versionSpoofer"];
-                    [settingsViewController reloadData];
-                    return YES;
-                }],
-                [YTSettingsSectionItemClass checkmarkItemWithTitle:@"v18.43.4" titleDescription:nil selectBlock:^BOOL (YTSettingsCell *cell, NSUInteger arg1) {
-                    [[NSUserDefaults standardUserDefaults] setInteger:65 forKey:@"versionSpoofer"];
-                    [settingsViewController reloadData];
-                    return YES;
-                }],
-                [YTSettingsSectionItemClass checkmarkItemWithTitle:@"v18.41.5" titleDescription:nil selectBlock:^BOOL (YTSettingsCell *cell, NSUInteger arg1) {
-                    [[NSUserDefaults standardUserDefaults] setInteger:66 forKey:@"versionSpoofer"];
-                    [settingsViewController reloadData];
-                    return YES;
-                }],
-                [YTSettingsSectionItemClass checkmarkItemWithTitle:@"v18.41.3" titleDescription:nil selectBlock:^BOOL (YTSettingsCell *cell, NSUInteger arg1) {
-                    [[NSUserDefaults standardUserDefaults] setInteger:67 forKey:@"versionSpoofer"];
-                    [settingsViewController reloadData];
-                    return YES;
-                }],
-                [YTSettingsSectionItemClass checkmarkItemWithTitle:@"v18.41.2" titleDescription:nil selectBlock:^BOOL (YTSettingsCell *cell, NSUInteger arg1) {
-                    [[NSUserDefaults standardUserDefaults] setInteger:68 forKey:@"versionSpoofer"];
-                    [settingsViewController reloadData];
-                    return YES;
-                }],
-                [YTSettingsSectionItemClass checkmarkItemWithTitle:@"v18.40.1" titleDescription:nil selectBlock:^BOOL (YTSettingsCell *cell, NSUInteger arg1) {
-                    [[NSUserDefaults standardUserDefaults] setInteger:69 forKey:@"versionSpoofer"];
-                    [settingsViewController reloadData];
-                    return YES;
-                }],
-                [YTSettingsSectionItemClass checkmarkItemWithTitle:@"v18.39.1" titleDescription:nil selectBlock:^BOOL (YTSettingsCell *cell, NSUInteger arg1) {
-                    [[NSUserDefaults standardUserDefaults] setInteger:70 forKey:@"versionSpoofer"];
-                    [settingsViewController reloadData];
-                    return YES;
-                }],
-                [YTSettingsSectionItemClass checkmarkItemWithTitle:@"v18.38.2" titleDescription:nil selectBlock:^BOOL (YTSettingsCell *cell, NSUInteger arg1) {
-                    [[NSUserDefaults standardUserDefaults] setInteger:71 forKey:@"versionSpoofer"];
-                    [settingsViewController reloadData];
-                    return YES;
-                }],
-                [YTSettingsSectionItemClass checkmarkItemWithTitle:@"v18.35.4" titleDescription:nil selectBlock:^BOOL (YTSettingsCell *cell, NSUInteger arg1) {
-                    [[NSUserDefaults standardUserDefaults] setInteger:72 forKey:@"versionSpoofer"];
-                    [settingsViewController reloadData];
-                    return YES;
-                }],
-                [YTSettingsSectionItemClass checkmarkItemWithTitle:@"v18.34.5 (Deprecated)" titleDescription:nil selectBlock:^BOOL (YTSettingsCell *cell, NSUInteger arg1) {
-                    [[NSUserDefaults standardUserDefaults] setInteger:73 forKey:@"versionSpoofer"];
-                    [settingsViewController reloadData];
-                    return YES;
-                }],
-                [YTSettingsSectionItemClass checkmarkItemWithTitle:@"v18.33.3 (Deprecated)" titleDescription:nil selectBlock:^BOOL (YTSettingsCell *cell, NSUInteger arg1) {
-                    [[NSUserDefaults standardUserDefaults] setInteger:74 forKey:@"versionSpoofer"];
-                    [settingsViewController reloadData];
-                    return YES;
-                }],
-                [YTSettingsSectionItemClass checkmarkItemWithTitle:@"v18.33.2 (Deprecated)" titleDescription:nil selectBlock:^BOOL (YTSettingsCell *cell, NSUInteger arg1) {
-                    [[NSUserDefaults standardUserDefaults] setInteger:75 forKey:@"versionSpoofer"];
-                    [settingsViewController reloadData];
-                    return YES;
-                }],
-                [YTSettingsSectionItemClass checkmarkItemWithTitle:@"v18.32.2 (Deprecated)" titleDescription:nil selectBlock:^BOOL (YTSettingsCell *cell, NSUInteger arg1) {
-                    [[NSUserDefaults standardUserDefaults] setInteger:76 forKey:@"versionSpoofer"];
-                    [settingsViewController reloadData];
-                    return YES;
-                }],
-                [YTSettingsSectionItemClass checkmarkItemWithTitle:@"v18.31.3 (Deprecated)" titleDescription:nil selectBlock:^BOOL (YTSettingsCell *cell, NSUInteger arg1) {
-                    [[NSUserDefaults standardUserDefaults] setInteger:77 forKey:@"versionSpoofer"];
-                    [settingsViewController reloadData];
-                    return YES;
-                }],
-                [YTSettingsSectionItemClass checkmarkItemWithTitle:@"v18.30.7 (Deprecated)" titleDescription:nil selectBlock:^BOOL (YTSettingsCell *cell, NSUInteger arg1) {
-                    [[NSUserDefaults standardUserDefaults] setInteger:78 forKey:@"versionSpoofer"];
-                    [settingsViewController reloadData];
-                    return YES;
-                }],
-                [YTSettingsSectionItemClass checkmarkItemWithTitle:@"v18.30.6 (Deprecated)" titleDescription:nil selectBlock:^BOOL (YTSettingsCell *cell, NSUInteger arg1) {
-                    [[NSUserDefaults standardUserDefaults] setInteger:79 forKey:@"versionSpoofer"];
-                    [settingsViewController reloadData];
-                    return YES;
-                }],
-                [YTSettingsSectionItemClass checkmarkItemWithTitle:@"v18.29.1 (Deprecated)" titleDescription:nil selectBlock:^BOOL (YTSettingsCell *cell, NSUInteger arg1) {
-                    [[NSUserDefaults standardUserDefaults] setInteger:80 forKey:@"versionSpoofer"];
-                    [settingsViewController reloadData];
-                    return YES;
-                }],
-                [YTSettingsSectionItemClass checkmarkItemWithTitle:@"v18.28.3 (Deprecated)" titleDescription:nil selectBlock:^BOOL (YTSettingsCell *cell, NSUInteger arg1) {
-                    [[NSUserDefaults standardUserDefaults] setInteger:81 forKey:@"versionSpoofer"];
-                    [settingsViewController reloadData];
-                    return YES;
-                }],
-                [YTSettingsSectionItemClass checkmarkItemWithTitle:@"v18.27.3 (Deprecated)" titleDescription:nil selectBlock:^BOOL (YTSettingsCell *cell, NSUInteger arg1) {
-                    [[NSUserDefaults standardUserDefaults] setInteger:82 forKey:@"versionSpoofer"];
-                    [settingsViewController reloadData];
-                    return YES;
-                }],
-                [YTSettingsSectionItemClass checkmarkItemWithTitle:@"v18.25.1 (Deprecated)" titleDescription:nil selectBlock:^BOOL (YTSettingsCell *cell, NSUInteger arg1) {
-                    [[NSUserDefaults standardUserDefaults] setInteger:83 forKey:@"versionSpoofer"];
-                    [settingsViewController reloadData];
-                    return YES;
-                }],
-                [YTSettingsSectionItemClass checkmarkItemWithTitle:@"v18.23.3 (Deprecated)" titleDescription:nil selectBlock:^BOOL (YTSettingsCell *cell, NSUInteger arg1) {
-                    [[NSUserDefaults standardUserDefaults] setInteger:84 forKey:@"versionSpoofer"];
-                    [settingsViewController reloadData];
-                    return YES;
-                }],
-                [YTSettingsSectionItemClass checkmarkItemWithTitle:@"v18.22.9 (Deprecated)" titleDescription:nil selectBlock:^BOOL (YTSettingsCell *cell, NSUInteger arg1) {
-                    [[NSUserDefaults standardUserDefaults] setInteger:85 forKey:@"versionSpoofer"];
-                    [settingsViewController reloadData];
-                    return YES;
-                }],
-                [YTSettingsSectionItemClass checkmarkItemWithTitle:@"v18.21.3 (Deprecated)" titleDescription:nil selectBlock:^BOOL (YTSettingsCell *cell, NSUInteger arg1) {
-                    [[NSUserDefaults standardUserDefaults] setInteger:86 forKey:@"versionSpoofer"];
-                    [settingsViewController reloadData];
-                    return YES;
-                }],
-                [YTSettingsSectionItemClass checkmarkItemWithTitle:@"v18.20.3 (Deprecated)" titleDescription:nil selectBlock:^BOOL (YTSettingsCell *cell, NSUInteger arg1) {
-                    [[NSUserDefaults standardUserDefaults] setInteger:87 forKey:@"versionSpoofer"];
-                    [settingsViewController reloadData];
-                    return YES;
-                }],
-                [YTSettingsSectionItemClass checkmarkItemWithTitle:@"v18.19.1 (Deprecated)" titleDescription:nil selectBlock:^BOOL (YTSettingsCell *cell, NSUInteger arg1) {
-                    [[NSUserDefaults standardUserDefaults] setInteger:88 forKey:@"versionSpoofer"];
-                    [settingsViewController reloadData];
-                    return YES;
-                }],
-                [YTSettingsSectionItemClass checkmarkItemWithTitle:@"v18.18.2 (Deprecated)" titleDescription:nil selectBlock:^BOOL (YTSettingsCell *cell, NSUInteger arg1) {
-                    [[NSUserDefaults standardUserDefaults] setInteger:89 forKey:@"versionSpoofer"];
-                    [settingsViewController reloadData];
-                    return YES;
-                }],
-                [YTSettingsSectionItemClass checkmarkItemWithTitle:@"v18.17.2 (Deprecated)" titleDescription:nil selectBlock:^BOOL (YTSettingsCell *cell, NSUInteger arg1) {
-                    [[NSUserDefaults standardUserDefaults] setInteger:90 forKey:@"versionSpoofer"];
-                    [settingsViewController reloadData];
-                    return YES;
-                }],
-                [YTSettingsSectionItemClass checkmarkItemWithTitle:@"v18.16.2 (Deprecated)" titleDescription:nil selectBlock:^BOOL (YTSettingsCell *cell, NSUInteger arg1) {
-                    [[NSUserDefaults standardUserDefaults] setInteger:91 forKey:@"versionSpoofer"];
-                    [settingsViewController reloadData];
-                    return YES;      
-                }],
-                [YTSettingsSectionItemClass checkmarkItemWithTitle:@"v18.15.1 (Deprecated)" titleDescription:nil selectBlock:^BOOL (YTSettingsCell *cell, NSUInteger arg1) {
-                    [[NSUserDefaults standardUserDefaults] setInteger:92 forKey:@"versionSpoofer"];
-                    [settingsViewController reloadData];
-                    return YES;
-                }],
-                [YTSettingsSectionItemClass checkmarkItemWithTitle:@"v18.14.1 (Deprecated)" titleDescription:nil selectBlock:^BOOL (YTSettingsCell *cell, NSUInteger arg1) {
-                    [[NSUserDefaults standardUserDefaults] setInteger:93 forKey:@"versionSpoofer"];
-                    [settingsViewController reloadData];
-                    return YES;
-                }],
-                [YTSettingsSectionItemClass checkmarkItemWithTitle:@"v18.13.4 (Deprecated)" titleDescription:nil selectBlock:^BOOL (YTSettingsCell *cell, NSUInteger arg1) {
-                    [[NSUserDefaults standardUserDefaults] setInteger:94 forKey:@"versionSpoofer"];
-                    [settingsViewController reloadData];
-                    return YES;
-                }],
-                [YTSettingsSectionItemClass checkmarkItemWithTitle:@"v18.12.2 (Deprecated)" titleDescription:nil selectBlock:^BOOL (YTSettingsCell *cell, NSUInteger arg1) {
-                    [[NSUserDefaults standardUserDefaults] setInteger:95 forKey:@"versionSpoofer"];
-                    [settingsViewController reloadData];
-                    return YES;
-                }],
-                [YTSettingsSectionItemClass checkmarkItemWithTitle:@"v18.11.2 (Deprecated)" titleDescription:nil selectBlock:^BOOL (YTSettingsCell *cell, NSUInteger arg1) {
-                    [[NSUserDefaults standardUserDefaults] setInteger:96 forKey:@"versionSpoofer"];
-                    [settingsViewController reloadData];
-                    return YES;
-                }],
-                [YTSettingsSectionItemClass checkmarkItemWithTitle:@"v18.10.1 (Deprecated)" titleDescription:nil selectBlock:^BOOL (YTSettingsCell *cell, NSUInteger arg1) {
-                    [[NSUserDefaults standardUserDefaults] setInteger:97 forKey:@"versionSpoofer"];
-                    [settingsViewController reloadData];
-                    return YES;
-                }],
-                [YTSettingsSectionItemClass checkmarkItemWithTitle:@"v18.09.4 (Deprecated)" titleDescription:nil selectBlock:^BOOL (YTSettingsCell *cell, NSUInteger arg1) {
-                    [[NSUserDefaults standardUserDefaults] setInteger:98 forKey:@"versionSpoofer"];
-                    [settingsViewController reloadData];
-                    return YES;
-               }],
-                [YTSettingsSectionItemClass checkmarkItemWithTitle:@"v18.08.1 (Deprecated)" titleDescription:nil selectBlock:^BOOL (YTSettingsCell *cell, NSUInteger arg1) {
-                    [[NSUserDefaults standardUserDefaults] setInteger:99 forKey:@"versionSpoofer"];
-                    [settingsViewController reloadData];
-                    return YES;
-                }],
-                [YTSettingsSectionItemClass checkmarkItemWithTitle:@"v18.07.5 (Deprecated)" titleDescription:nil selectBlock:^BOOL (YTSettingsCell *cell, NSUInteger arg1) {
-                    [[NSUserDefaults standardUserDefaults] setInteger:100 forKey:@"versionSpoofer"];
-                    [settingsViewController reloadData];
-                    return YES;
-                }],
-                [YTSettingsSectionItemClass checkmarkItemWithTitle:@"v18.05.2 (Deprecated)" titleDescription:nil selectBlock:^BOOL (YTSettingsCell *cell, NSUInteger arg1) {
-                    [[NSUserDefaults standardUserDefaults] setInteger:101 forKey:@"versionSpoofer"];
-                    [settingsViewController reloadData];
-                    return YES;
-                }],
-                [YTSettingsSectionItemClass checkmarkItemWithTitle:@"v18.04.3 (Deprecated)" titleDescription:nil selectBlock:^BOOL (YTSettingsCell *cell, NSUInteger arg1) {
-                    [[NSUserDefaults standardUserDefaults] setInteger:102 forKey:@"versionSpoofer"];
-                    [settingsViewController reloadData];
-                    return YES;
-                }],
-                [YTSettingsSectionItemClass checkmarkItemWithTitle:@"v18.03.3 (Deprecated)" titleDescription:nil selectBlock:^BOOL (YTSettingsCell *cell, NSUInteger arg1) {
-                    [[NSUserDefaults standardUserDefaults] setInteger:103 forKey:@"versionSpoofer"];
-                    [settingsViewController reloadData];
-                    return YES;
-                }],
-                [YTSettingsSectionItemClass checkmarkItemWithTitle:@"v18.02.03 (Deprecated)" titleDescription:nil selectBlock:^BOOL (YTSettingsCell *cell, NSUInteger arg1) {
-                    [[NSUserDefaults standardUserDefaults] setInteger:104 forKey:@"versionSpoofer"];
-                    [settingsViewController reloadData];
-                    return YES;
-                }],
-                [YTSettingsSectionItemClass checkmarkItemWithTitle:@"v18.01.6 (Deprecated)" titleDescription:nil selectBlock:^BOOL (YTSettingsCell *cell, NSUInteger arg1) {
-                    [[NSUserDefaults standardUserDefaults] setInteger:105 forKey:@"versionSpoofer"];
-                    [settingsViewController reloadData];
-                    return YES;
-                }],
-                [YTSettingsSectionItemClass checkmarkItemWithTitle:@"v18.01.4 (Deprecated)" titleDescription:nil selectBlock:^BOOL (YTSettingsCell *cell, NSUInteger arg1) {
-                    [[NSUserDefaults standardUserDefaults] setInteger:106 forKey:@"versionSpoofer"];
-                    [settingsViewController reloadData];
-                    return YES;
-               }],
-                [YTSettingsSectionItemClass checkmarkItemWithTitle:@"v18.01.2 (Deprecated)" titleDescription:nil selectBlock:^BOOL (YTSettingsCell *cell, NSUInteger arg1) {
-                    [[NSUserDefaults standardUserDefaults] setInteger:107 forKey:@"versionSpoofer"];
-                    [settingsViewController reloadData];
-                    return YES;
-                }],
-                [YTSettingsSectionItemClass checkmarkItemWithTitle:@"v17.49.6 (Deprecated)" titleDescription:nil selectBlock:^BOOL (YTSettingsCell *cell, NSUInteger arg1) {
-                    [[NSUserDefaults standardUserDefaults] setInteger:108 forKey:@"versionSpoofer"];
-                    [settingsViewController reloadData];
-                    return YES;
-                }],
-                [YTSettingsSectionItemClass checkmarkItemWithTitle:@"v17.49.4 (Deprecated)" titleDescription:nil selectBlock:^BOOL (YTSettingsCell *cell, NSUInteger arg1) {
-                    [[NSUserDefaults standardUserDefaults] setInteger:109 forKey:@"versionSpoofer"];
-                    [settingsViewController reloadData];
-                    return YES;
-                }],
-                [YTSettingsSectionItemClass checkmarkItemWithTitle:@"v17.46.4 (Deprecated)" titleDescription:nil selectBlock:^BOOL (YTSettingsCell *cell, NSUInteger arg1) {
-                    [[NSUserDefaults standardUserDefaults] setInteger:110 forKey:@"versionSpoofer"];
-                    [settingsViewController reloadData];
-                    return YES;
-                }],
-                [YTSettingsSectionItemClass checkmarkItemWithTitle:@"v17.45.1 (Deprecated)" titleDescription:nil selectBlock:^BOOL (YTSettingsCell *cell, NSUInteger arg1) {
-                    [[NSUserDefaults standardUserDefaults] setInteger:111 forKey:@"versionSpoofer"];
-                    [settingsViewController reloadData];
-                    return YES;
-                }],
-                [YTSettingsSectionItemClass checkmarkItemWithTitle:@"v17.44.4 (Deprecated)" titleDescription:nil selectBlock:^BOOL (YTSettingsCell *cell, NSUInteger arg1) {
-                    [[NSUserDefaults standardUserDefaults] setInteger:112 forKey:@"versionSpoofer"];
-                    [settingsViewController reloadData];
-                    return YES;
-                }],
-                [YTSettingsSectionItemClass checkmarkItemWithTitle:@"v17.43.1 (Deprecated)" titleDescription:nil selectBlock:^BOOL (YTSettingsCell *cell, NSUInteger arg1) {
-                    [[NSUserDefaults standardUserDefaults] setInteger:113 forKey:@"versionSpoofer"];
-                    [settingsViewController reloadData];
-                    return YES;
-                }],
-                [YTSettingsSectionItemClass checkmarkItemWithTitle:@"v17.42.7 (Deprecated)" titleDescription:nil selectBlock:^BOOL (YTSettingsCell *cell, NSUInteger arg1) {
-                    [[NSUserDefaults standardUserDefaults] setInteger:114 forKey:@"versionSpoofer"];
-                    [settingsViewController reloadData];
-                    return YES;
-                }],
-                [YTSettingsSectionItemClass checkmarkItemWithTitle:@"v17.42.6 (Deprecated)" titleDescription:nil selectBlock:^BOOL (YTSettingsCell *cell, NSUInteger arg1) {
-                    [[NSUserDefaults standardUserDefaults] setInteger:115 forKey:@"versionSpoofer"];
-                    [settingsViewController reloadData];
-                    return YES;
-                }],
-                [YTSettingsSectionItemClass checkmarkItemWithTitle:@"v17.41.2 (Deprecated)" titleDescription:nil selectBlock:^BOOL (YTSettingsCell *cell, NSUInteger arg1) {
-                    [[NSUserDefaults standardUserDefaults] setInteger:116 forKey:@"versionSpoofer"];
-                    [settingsViewController reloadData];
-                    return YES;
-               }],
-                [YTSettingsSectionItemClass checkmarkItemWithTitle:@"v17.40.5 (Deprecated)" titleDescription:nil selectBlock:^BOOL (YTSettingsCell *cell, NSUInteger arg1) {
-                    [[NSUserDefaults standardUserDefaults] setInteger:117 forKey:@"versionSpoofer"];
-                    [settingsViewController reloadData];
-                    return YES;
-                }],
-                [YTSettingsSectionItemClass checkmarkItemWithTitle:@"v17.39.4 (Deprecated)" titleDescription:nil selectBlock:^BOOL (YTSettingsCell *cell, NSUInteger arg1) {
-                    [[NSUserDefaults standardUserDefaults] setInteger:118 forKey:@"versionSpoofer"];
-                    [settingsViewController reloadData];
-                    return YES;
-                }],
-                [YTSettingsSectionItemClass checkmarkItemWithTitle:@"v17.38.10 (Deprecated)" titleDescription:nil selectBlock:^BOOL (YTSettingsCell *cell, NSUInteger arg1) {
-                    [[NSUserDefaults standardUserDefaults] setInteger:119 forKey:@"versionSpoofer"];
-                    [settingsViewController reloadData];
-                    return YES;
-                }],
-                [YTSettingsSectionItemClass checkmarkItemWithTitle:@"v17.38.9 (Deprecated)" titleDescription:nil selectBlock:^BOOL (YTSettingsCell *cell, NSUInteger arg1) {
-                    [[NSUserDefaults standardUserDefaults] setInteger:120 forKey:@"versionSpoofer"];
-                    [settingsViewController reloadData];
-                    return YES;
-                }],
-                [YTSettingsSectionItemClass checkmarkItemWithTitle:@"v17.37.3 (Deprecated)" titleDescription:nil selectBlock:^BOOL (YTSettingsCell *cell, NSUInteger arg1) {
-                    [[NSUserDefaults standardUserDefaults] setInteger:121 forKey:@"versionSpoofer"];
-                    [settingsViewController reloadData];
-                    return YES;
-                }],
-                [YTSettingsSectionItemClass checkmarkItemWithTitle:@"v17.36.4 (Deprecated)" titleDescription:nil selectBlock:^BOOL (YTSettingsCell *cell, NSUInteger arg1) {
-                    [[NSUserDefaults standardUserDefaults] setInteger:122 forKey:@"versionSpoofer"];
-                    [settingsViewController reloadData];
-                    return YES;
-                }],
-                [YTSettingsSectionItemClass checkmarkItemWithTitle:@"v17.36.3 (Deprecated)" titleDescription:nil selectBlock:^BOOL (YTSettingsCell *cell, NSUInteger arg1) {
-                    [[NSUserDefaults standardUserDefaults] setInteger:123 forKey:@"versionSpoofer"];
-                    [settingsViewController reloadData];
-                    return YES;
-                }],
-                [YTSettingsSectionItemClass checkmarkItemWithTitle:@"v17.35.3 (Deprecated)" titleDescription:nil selectBlock:^BOOL (YTSettingsCell *cell, NSUInteger arg1) {
-                    [[NSUserDefaults standardUserDefaults] setInteger:124 forKey:@"versionSpoofer"];
-                    [settingsViewController reloadData];
-                    return YES;
-                }],
-                [YTSettingsSectionItemClass checkmarkItemWithTitle:@"v17.34.3 (Deprecated)" titleDescription:nil selectBlock:^BOOL (YTSettingsCell *cell, NSUInteger arg1) {
-                    [[NSUserDefaults standardUserDefaults] setInteger:125 forKey:@"versionSpoofer"];
-                    [settingsViewController reloadData];
-                    return YES;
-                }],
-                [YTSettingsSectionItemClass checkmarkItemWithTitle:@"v17.33.2 (Deprecated)" titleDescription:nil selectBlock:^BOOL (YTSettingsCell *cell, NSUInteger arg1) {
-                    [[NSUserDefaults standardUserDefaults] setInteger:126 forKey:@"versionSpoofer"];
-                    [settingsViewController reloadData];
-                    return YES;
+                SPOOFER_VERSION(@"v19.49.7", 0),
+                SPOOFER_VERSION(@"v19.49.5", 1),
+                SPOOFER_VERSION(@"v19.49.3", 2),
+                SPOOFER_VERSION(@"v19.47.7", 3),
+                SPOOFER_VERSION(@"v19.46.3", 4),
+                SPOOFER_VERSION(@"v19.45.4", 5),
+                SPOOFER_VERSION(@"v19.44.4", 6),
+                SPOOFER_VERSION(@"v19.43.2", 7),
+                SPOOFER_VERSION(@"v19.42.1", 8),
+                SPOOFER_VERSION(@"v19.41.3", 9),
+                SPOOFER_VERSION(@"v19.40.4", 10)
+                SPOOFER_VERSION(@"v19.39.1", 11),
+                SPOOFER_VERSION(@"v19.38.2", 12),
+                SPOOFER_VERSION(@"v19.37.2", 13),
+                SPOOFER_VERSION(@"v19.36.1", 14),
+                SPOOFER_VERSION(@"v19.35.3", 15),
+                SPOOFER_VERSION(@"v19.34.2", 16),
+                SPOOFER_VERSION(@"v19.33.2", 17),
+                SPOOFER_VERSION(@"v19.32.8", 18),
+                SPOOFER_VERSION(@"v19.32.6", 19),
+                SPOOFER_VERSION(@"v19.31.4", 20),
+                SPOOFER_VERSION(@"v19.30.2", 21),
+                SPOOFER_VERSION(@"v19.29.1", 22),
+                SPOOFER_VERSION(@"v19.28.1", 23),
+                SPOOFER_VERSION(@"v19.26.5", 24),
+                SPOOFER_VERSION(@"v19.25.4", 25),
+                SPOOFER_VERSION(@"v19.25.3", 26),
+                SPOOFER_VERSION(@"v19.24.3", 27),
+                SPOOFER_VERSION(@"v19.24.2", 28),
+                SPOOFER_VERSION(@"v19.23.3", 29),
+                SPOOFER_VERSION(@"v19.22.6", 30),
+                SPOOFER_VERSION(@"v19.22.3", 31),
+                SPOOFER_VERSION(@"v19.21.3", 32),
+                SPOOFER_VERSION(@"v19.21.2", 33),
+                SPOOFER_VERSION(@"v19.20.2", 34),
+                SPOOFER_VERSION(@"v19.19.7", 35),
+                SPOOFER_VERSION(@"v19.19.5", 36),
+                SPOOFER_VERSION(@"v19.18.2", 37),
+                SPOOFER_VERSION(@"v19.17.2", 38),
+                SPOOFER_VERSION(@"v19.16.3", 39),
+                SPOOFER_VERSION(@"v19.15.1", 40),
+                SPOOFER_VERSION(@"v19.14.3", 41),
+                SPOOFER_VERSION(@"v19.14.2", 42),
+                SPOOFER_VERSION(@"v19.13.1", 43),
+                SPOOFER_VERSION(@"v19.12.3", 44),
+                SPOOFER_VERSION(@"v19.10.7", 45),
+                SPOOFER_VERSION(@"v19.10.6", 46),
+                SPOOFER_VERSION(@"v19.10.5", 47),
+                SPOOFER_VERSION(@"v19.09.4", 48),
+                SPOOFER_VERSION(@"v19.09.3", 49),
+                SPOOFER_VERSION(@"v19.08.2", 50),
+                SPOOFER_VERSION(@"v19.07.5", 51),
+                SPOOFER_VERSION(@"v19.07.4", 52),
+                SPOOFER_VERSION(@"v19.06.2", 53),
+                SPOOFER_VERSION(@"v19.05.5", 54),
+                SPOOFER_VERSION(@"v19.05.3", 55),
+                SPOOFER_VERSION(@"v19.04.3", 56),
+                SPOOFER_VERSION(@"v19.03.2", 57),
+                SPOOFER_VERSION(@"v19.02.1", 58),
+                SPOOFER_VERSION(@"v19.01.1", 59),
+                SPOOFER_VERSION(@"v18.49.3", 60),
+                SPOOFER_VERSION(@"v18.48.3", 61),
+                SPOOFER_VERSION(@"v18.46.3", 62),
+                SPOOFER_VERSION(@"v18.45.2", 63),
+                SPOOFER_VERSION(@"v18.44.3", 64),
+                SPOOFER_VERSION(@"v18.43.4", 65),
+                SPOOFER_VERSION(@"v18.41.5", 66),
+                SPOOFER_VERSION(@"v18.41.3", 67),
+                SPOOFER_VERSION(@"v18.41.2", 68),
+                SPOOFER_VERSION(@"v18.40.1", 69),
+                SPOOFER_VERSION(@"v18.39.1", 70),
+                SPOOFER_VERSION(@"v18.38.2", 71),
+                SPOOFER_VERSION(@"v18.35.4", 72),
+                SPOOFER_VERSION(@"v18.34.5", 73),
+                SPOOFER_VERSION(@"v18.33.3", 74),
+                SPOOFER_VERSION(@"v18.33.2", 75),
+                SPOOFER_VERSION(@"v18.32.2", 76),
+                SPOOFER_VERSION(@"v18.31.3", 77),
+                SPOOFER_VERSION(@"v18.30.7", 78),
+                SPOOFER_VERSION(@"v18.30.6", 79),
+                SPOOFER_VERSION(@"v18.29.1", 80),
+                SPOOFER_VERSION(@"v18.28.3", 81),
+                SPOOFER_VERSION(@"v18.27.3", 82),
+                SPOOFER_VERSION(@"v18.25.1", 83),
+                SPOOFER_VERSION(@"v18.23.3", 84),
+                SPOOFER_VERSION(@"v18.22.9", 85),
+                SPOOFER_VERSION(@"v18.21.3", 86),
+                SPOOFER_VERSION(@"v18.20.3", 87),
+                SPOOFER_VERSION(@"v18.19.1", 88),
+                SPOOFER_VERSION(@"v18.18.2", 89),
+                SPOOFER_VERSION(@"v18.17.2", 90),
+                SPOOFER_VERSION(@"v18.16.2", 91),
+                SPOOFER_VERSION(@"v18.15.1", 92),
+                SPOOFER_VERSION(@"v18.14.1", 93),
+                SPOOFER_VERSION(@"v18.13.4", 94),
+                SPOOFER_VERSION(@"v18.12.2", 95),
+                SPOOFER_VERSION(@"v18.11.2", 96),
+                SPOOFER_VERSION(@"v18.10.1", 97),
+                SPOOFER_VERSION(@"v18.09.4", 98),
+                SPOOFER_VERSION(@"v18.08.1", 99),
+                SPOOFER_VERSION(@"v18.07.5", 100),
+                SPOOFER_VERSION(@"v18.05.2", 101),
+                SPOOFER_VERSION(@"v18.04.3", 102),
+                SPOOFER_VERSION(@"v18.03.3", 103),
+                SPOOFER_VERSION(@"v18.02.03", 104),
+                SPOOFER_VERSION(@"v18.01.6", 105),
+                SPOOFER_VERSION(@"v18.01.4", 106),
+                SPOOFER_VERSION(@"v18.01.2", 107),
+                SPOOFER_VERSION(@"v17.49.6", 108),
+                SPOOFER_VERSION(@"v17.49.4", 109),
+                SPOOFER_VERSION(@"v17.46.4", 110),
+                SPOOFER_VERSION(@"v17.45.1", 111),
+                SPOOFER_VERSION(@"v17.44.4", 112),
+                SPOOFER_VERSION(@"v17.43.1", 113),
+                SPOOFER_VERSION(@"v17.42.7", 114),
+                SPOOFER_VERSION(@"v17.42.6", 115),
+                SPOOFER_VERSION(@"v17.41.2", 116),
+                SPOOFER_VERSION(@"v17.40.5", 117),
+                SPOOFER_VERSION(@"v17.39.4", 118),
+                SPOOFER_VERSION(@"v17.38.10", 119),
+                SPOOFER_VERSION(@"v17.38.9", 120),
+                SPOOFER_VERSION(@"v17.37.2", 121),
+                SPOOFER_VERSION(@"v17.36.4", 122),
+                SPOOFER_VERSION(@"v17.36.3", 123),
+                SPOOFER_VERSION(@"v17.35.3", 124),
+                SPOOFER_VERSION(@"v17.34.3", 125),
+                SPOOFER_VERSION(@"v17.33.2", 126)
                 }]
             ];
             YTSettingsPickerViewController *picker = [[%c(YTSettingsPickerViewController) alloc] initWithNavTitle:LOC(@"VERSION_SPOOFER_SELECTOR") pickerSectionTitle:nil rows:rows selectedItemIndex:appVersionSpoofer() parentResponder:[self parentResponder]];
