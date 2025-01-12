@@ -68,11 +68,21 @@
 
 - (UICollectionViewCell *)collectionView:(UICollectionView *)collectionView cellForItemAtIndexPath:(NSIndexPath *)indexPath {
     UICollectionViewCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:@"Cell" forIndexPath:indexPath];
-    UILabel *indexLabel = [[UILabel alloc] initWithFrame:cell.contentView.bounds];
+    YTIPivotBarItemRenderer *itemRenderer = self.pivotBarItems[indexPath.row];
+    
+    UILabel *indexLabel = [[UILabel alloc] initWithFrame:CGRectMake(0, 0, cell.contentView.bounds.size.width, cell.contentView.bounds.size.height/2)];
     indexLabel.text = [NSString stringWithFormat:@"%ld", (long)indexPath.row];
     indexLabel.textAlignment = NSTextAlignmentCenter;
     indexLabel.textColor = [UIColor whiteColor];
+
+    UILabel *identifierLabel = [[UILabel alloc] initWithFrame:CGRectMake(0, cell.contentView.bounds.size.height/2, cell.contentView.bounds.size.width, cell.contentView.bounds.size.height/2)];
+    identifierLabel.text = itemRenderer.pivotIdentifier;
+    identifierLabel.textAlignment = NSTextAlignmentCenter;
+    identifierLabel.textColor = [UIColor whiteColor];
+    identifierLabel.font = [UIFont systemFontOfSize:10];
+
     [cell.contentView addSubview:indexLabel];
+    [cell.contentView addSubview:identifierLabel];
     return cell;
 }
 
