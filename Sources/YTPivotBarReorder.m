@@ -5,7 +5,7 @@
 #import <YouTubeHeader/YTIPivotBarRenderer.h>
 #import <YouTubeHeader/YTIPivotBarSupportedRenderers.h>
 #import <YouTubeHeader/YTIPivotBarItemRenderer.h>
-#import <YouTubeHeader/YTIIcon.h>
+#import <YouTubeHeader/YTAssetLoader.h>
 
 @interface YTPivotBarReorder ()
 
@@ -71,6 +71,7 @@
     UICollectionViewCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:@"Cell" forIndexPath:indexPath];
     UIImageView *iconView = [[UIImageView alloc] initWithFrame:cell.contentView.bounds];
     YTIPivotBarItemRenderer *itemRenderer = self.pivotBarItems[indexPath.row];
+    iconView.image = [YTAssetLoader loadImageWithIdentifier:itemRenderer.icon.identifier];
     iconView.tintColor = [UIColor whiteColor];
     iconView.contentMode = UIViewContentModeScaleAspectFit;
     [cell.contentView addSubview:iconView];
