@@ -53,7 +53,7 @@
         YTIPivotBarRenderer *pivotBarRenderer = [guideRenderers pivotBarRenderer];
         for (YTIPivotBarSupportedRenderers *renderer in [pivotBarRenderer itemsArray]) {
             YTIPivotBarItemRenderer *itemRenderer = [renderer pivotBarItemRenderer];
-            if (itemRenderer && itemRenderer.isVisible) {
+            if (itemRenderer && !itemRenderer.isDisabled) {
                 [activeTabs addObject:itemRenderer];
             }
         }
@@ -79,9 +79,7 @@
 }
 
 - (UIImage *)imageFromYTIIcon:(YTIIcon *)icon {
-    // Implement the conversion from YTIIcon to UIImage
-    // This is a placeholder implementation and should be replaced with actual conversion logic
-    NSURL *url = [NSURL URLWithString:icon.iconURL];
+    NSURL *url = [NSURL URLWithString:icon.iconURLString];
     NSData *data = [NSData dataWithContentsOfURL:url];
     return [UIImage imageWithData:data];
 }
