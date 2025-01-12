@@ -48,6 +48,7 @@
 #import <YouTubeHeader/YTPlayerOverlay.h>
 #import <YouTubeHeader/YTPlayerOverlayProvider.h>
 #import <YouTubeHeader/YTPlayerOverlayManager.h>
+#import <YouTubeHeader/QTMIcon.h>
 #import <YouTubeHeader/YTReelModel.h>
 #import <YouTubeHeader/YTReelWatchPlaybackOverlayView.h>
 #import <YouTubeHeader/YTResponder.h>
@@ -178,6 +179,18 @@ static NSString *const kNewSettingsUI = @"newSettingsUI_enabled";
 static NSString *const kFlex = @"flex_enabled";
 // unused (uYouEnhanced)
 static NSString *const kGoogleSigninFix = @"googleSigninFix_enabled";
+static BOOL useDefaultStyle() {
+    return IS_ENABLED(@"enableNotificationIconStyle") && getNotificationIconStyle() == 0;
+}
+static BOOL useThinOutlineStyle() {
+    return IS_ENABLED(@"enableNotificationIconStyle") && getNotificationIconStyle() == 1;
+}
+static BOOL usePre2020Style() {
+    return IS_ENABLED(@"enableNotificationIconStyle") && getNotificationIconStyle() == 2;
+}
+static BOOL useInboxStyle() {
+    return IS_ENABLED(@"enableNotificationIconStyle") && getNotificationIconStyle() == 3;
+}
 
 // Always show remaining time in video player - @bhackel
 // Header has been moved to https://github.com/PoomSmart/YouTubeHeader/blob/main/YTPlayerBarController.h
