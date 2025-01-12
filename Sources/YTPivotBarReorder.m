@@ -10,6 +10,8 @@
 
 @property (strong, nonatomic) UICollectionView *collectionView;
 @property (strong, nonatomic) NSMutableArray *pivotBarItems;
+@property (strong, nonatomic) UIButton *indexButton;
+@property (strong, nonatomic) NSMutableArray *indexOptions;
 
 @end
 
@@ -17,7 +19,7 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    self.title = @"Reorder Pivot Bar Icons";
+    self.title = @"Reorder Notifications Bar";
     self.view.backgroundColor = [UIColor colorWithRed:0.129 green:0.129 blue:0.129 alpha:1.0];
     
     UIBarButtonItem *closeButton = [[UIBarButtonItem alloc] initWithTitle:@"Close" style:UIBarButtonItemStyleDone target:self action:@selector(closeController)];
@@ -30,14 +32,17 @@
     self.collectionView = [[UICollectionView alloc] initWithFrame:self.view.bounds collectionViewLayout:layout];
     self.collectionView.delegate = self;
     self.collectionView.dataSource = self;
-    self.collectionView.dragDelegate = self;
-    self.collectionView.dropDelegate = self;
-    self.collectionView.dragInteractionEnabled = YES;
     self.collectionView.backgroundColor = [UIColor colorWithRed:0.129 green:0.129 blue:0.129 alpha:1.0];
     [self.collectionView registerClass:[UICollectionViewCell class] forCellWithReuseIdentifier:@"Cell"];
     [self.view addSubview:self.collectionView];
     
     [self loadActivePivotTabs];
+    
+    self.indexButton = [UIButton buttonWithType:UIButtonTypeSystem];
+    self.indexButton.frame = CGRectMake(10, 80, 300, 40);
+    [self.indexButton setTitle:@"Select Index" forState:UIControlStateNormal];
+    [self.indexButton addTarget:self action:@selector(showIndexOptions) forControlEvents:UIControlEventTouchUpInside];
+    [self.view addSubview:self.indexButton];
 }
 
 - (void)closeController {
@@ -59,6 +64,40 @@
     }
     
     self.pivotBarItems = activeTabs;
+    self.indexOptions = [NSMutableArray array];
+    for (int i = 1; i <= self.pivotBarItems.count; i++) {
+        [self.indexOptions addObject:[NSString stringWithFormat:@"%d", i]];
+    }
+    [self.collectionView reloadData];
+}
+
+- (void)showIndexOptions {
+    UIAlertController *alert = [UIAlertController alertControllerWithTitle:@"Select Index"
+                                                                   message:nil
+                                                            preferredStyle:UIAlertControllerStyleActionSheet];
+    for (NSString *indexOption in self.indexOptions) {
+        UIAlertAction *action = [UIAlertAction actionWithTitle:indexOption
+                                                         style:UIAlertActionStyleDefault
+                                                       handler:^(UIAlertAction *action) {
+            [self.indexButton setTitle:[NSString stringWithFormat:@"Selected Index: %@", indexOption] forState:UIControlStateNormal];
+            [self reorderPivotTabToIndex:[indexOption intValue] - 1];
+        }];
+        [alert addAction:action];
+    }
+    UIAlertAction *cancelAction = [UIAlertAction actionWithTitle:@"Cancel"
+                                                           style:UIAlertActionStyleCancel
+                                                         handler:nil];
+    [alert addAction:cancelAction];
+    
+    [self presentViewController:alert animated:YES completion:nil];
+}
+
+- (void)reorderPivotTabToIndex:(NSUInteger)index {
+    if (index >= self.pivotBarItems.count) return;
+
+    YTIPivotBarItemRenderer *selectedItem = self.pivotBarItems[0]; // Assuming the first item is the one to reorder
+    [self.pivotBarItems removeObjectAtIndex:0];
+    [self.pivotBarItems insertObject:selectedItem atIndex:index];
     [self.collectionView reloadData];
 }
 
@@ -70,46 +109,13 @@
     UICollectionViewCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:@"Cell" forIndexPath:indexPath];
     YTIPivotBarItemRenderer *itemRenderer = self.pivotBarItems[indexPath.row];
     
-    UILabel *indexLabel = [[UILabel alloc] initWithFrame:CGRectMake(0, 0, cell.contentView.bounds.size.width, cell.contentView.bounds.size.height/2)];
-    indexLabel.text = [NSString stringWithFormat:@"%ld", (long)indexPath.row];
+    UILabel *indexLabel = [[UILabel alloc] initWithFrame:cell.contentView.bounds];
+    indexLabel.text = [NSString stringWithFormat:@"%ld", (long)indexPath.row + 1];
     indexLabel.textAlignment = NSTextAlignmentCenter;
     indexLabel.textColor = [UIColor whiteColor];
-
-    UILabel *identifierLabel = [[UILabel alloc] initWithFrame:CGRectMake(0, cell.contentView.bounds.size.height/2, cell.contentView.bounds.size.width, cell.contentView.bounds.size.height/2)];
-    identifierLabel.text = itemRenderer.pivotIdentifier;
-    identifierLabel.textAlignment = NSTextAlignmentCenter;
-    identifierLabel.textColor = [UIColor whiteColor];
-    identifierLabel.font = [UIFont systemFontOfSize:10];
-
     [cell.contentView addSubview:indexLabel];
-    [cell.contentView addSubview:identifierLabel];
+    
     return cell;
-}
-
-- (NSArray<UIDragItem *> *)collectionView:(UICollectionView *)collectionView itemsForBeginningDragSession:(id<UIDragSession>)session atIndexPath:(NSIndexPath *)indexPath {
-    NSItemProvider *itemProvider = [[NSItemProvider alloc] initWithObject:self.pivotBarItems[indexPath.row]];
-    UIDragItem *dragItem = [[UIDragItem alloc] initWithItemProvider:itemProvider];
-    dragItem.localObject = self.pivotBarItems[indexPath.row];
-    return @[dragItem];
-}
-
-- (void)collectionView:(UICollectionView *)collectionView performDropWithCoordinator:(id<UICollectionViewDropCoordinator>)coordinator {
-    NSIndexPath *destinationIndexPath = coordinator.destinationIndexPath;
-    if (!destinationIndexPath) {
-        destinationIndexPath = [NSIndexPath indexPathForRow:self.pivotBarItems.count - 1 inSection:0];
-    }
-
-    for (id<UICollectionViewDropItem> dropItem in coordinator.items) {
-        NSIndexPath *sourceIndexPath = dropItem.sourceIndexPath;
-        if (sourceIndexPath) {
-            [collectionView performBatchUpdates:^{
-                id item = self.pivotBarItems[sourceIndexPath.row];
-                [self.pivotBarItems removeObjectAtIndex:sourceIndexPath.row];
-                [self.pivotBarItems insertObject:item atIndex:destinationIndexPath.row];
-                [collectionView moveItemAtIndexPath:sourceIndexPath toIndexPath:destinationIndexPath];
-            } completion:nil];
-        }
-    }
 }
 
 - (YTIGuideResponse *)getGuideResponse {
