@@ -1,6 +1,7 @@
 #import "RootOptionsController.h"
 #import "ColourOptionsController.h"
 #import "ColourOptionsController2.h"
+#import "YTPivotBarReorder.h"
 
 @interface RootOptionsController ()
 
@@ -16,7 +17,6 @@
 
     self.title = @"uYouEnhanced Extras Menu";
     [self.navigationController.navigationBar setTitleTextAttributes:@{NSFontAttributeName: [UIFont fontWithName:@"YTSans-Bold" size:22], NSForegroundColorAttributeName: [UIColor whiteColor]}];
-
     [self setupBackButton];
     [self setupTableView];
 }
@@ -67,7 +67,7 @@
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
-    return (section == 0) ? 2 : 1;
+    return (section == 0) ? 3 : 1;
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
@@ -99,8 +99,13 @@
         }
         if (indexPath.row == 1) {
             cell.textLabel.text = @"Custom Tint Color";
-            cell.detailTextLabel.text = isPortrait && isPhone ? @"" : @"You must go to uYouEnhanced settings and have LowContrastMode enabled and then go to 'LowContrastMode Selector' and set it to 'Custom' for it to work.";
+            cell.detailTextLabel.text = isPortrait && isPhone ? @"" : @"You must go to uYouEnhanced settings and have LowContrastMode enabled and then go to 'LowContrastMode Selector' and set it to 'Custom Tint Mode' for it to work.";
             cell.imageView.image = [UIImage systemImageNamed:@"drop.fill"];
+        }
+        if (indexPath.row == 2) {
+            cell.textLabel.text = @"Reorder Pivot Bar Icons";
+            cell.detailTextLabel.text = @"";
+            cell.imageView.image = [UIImage systemImageNamed:@"rectangle.grid.1x2.fill"];
         }
     } else if (indexPath.section == 1) {
         if (indexPath.row == 0) {
@@ -165,6 +170,13 @@
             colourOptionsController2View.modalPresentationStyle = UIModalPresentationFullScreen;
 
             [self presentViewController:colourOptionsController2View animated:YES completion:nil];
+        }
+        if (indexPath.row == 2) {
+            YTPivotBarReorder *pivotBarReorderController = [[YTPivotBarReorder alloc] init];
+            UINavigationController *pivotBarReorderControllerView = [[UINavigationController alloc] initWithRootViewController:pivotBarReorderController];
+            pivotBarReorderControllerView.modalPresentationStyle = UIModalPresentationFullScreen;
+
+            [self presentViewController:pivotBarReorderControllerView animated:YES completion:nil];
         }
     }
     if (indexPath.section == 1) {
