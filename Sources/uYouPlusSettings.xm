@@ -1067,7 +1067,6 @@ NSString *cacheDescription = [NSString stringWithFormat:@"%@", GetCacheSize()];
                 SPOOFER_VERSION(@"v17.35.3", 124),
                 SPOOFER_VERSION(@"v17.34.3", 125),
                 SPOOFER_VERSION(@"v17.33.2", 126)
-                }]
             ];
             YTSettingsPickerViewController *picker = [[%c(YTSettingsPickerViewController) alloc] initWithNavTitle:LOC(@"VERSION_SPOOFER_SELECTOR") pickerSectionTitle:nil rows:rows selectedItemIndex:appVersionSpoofer() parentResponder:[self parentResponder]];
             [settingsViewController pushViewController:picker];
