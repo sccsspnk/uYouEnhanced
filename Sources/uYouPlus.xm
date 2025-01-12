@@ -37,18 +37,23 @@ static BOOL useInboxStyle() {
 - (UIImage *)pivotBarItemIconImageWithIconType:(int)type color:(UIColor *)color useNewIcons:(BOOL)isNew selected:(BOOL)isSelected {
     NSString *imageName;
     UIColor *iconColor;
-    if (useThinOutlineStyle()) {
-        imageName = isSelected ? @"notifications_selected" : @"notifications_24pt";
-        iconColor = [%c(YTColor) white1];
-    } else if (usePre2020Style()) {
-        imageName = @"notifications_selected";
-        iconColor = isSelected ? [%c(YTColor) white1] : [UIColor grayColor];
-    } else if (useInboxStyle()) {
-        imageName = @"inbox_selected";
-        iconColor = isSelected ? [%c(YTColor) white1] : [UIColor grayColor];
-    } else {
-        imageName = isSelected ? @"notifications_selected" : @"notifications_unselected";
-        iconColor = [%c(YTColor) white1];
+    switch (getNotificationIconStyle()) {
+        case 1:  // Thin outline style (2020+)
+            imageName = isSelected ? @"notifications_selected" : @"notifications_24pt";
+            iconColor = [%c(YTColor) white1];
+            break;
+        case 2:  // Filled style (2018+)
+            imageName = @"notifications_selected";
+            iconColor = isSelected ? [%c(YTColor) white1] : [UIColor grayColor];
+            break;
+        case 3:  // Inbox style (2014+)
+            imageName = @"inbox_selected";
+            iconColor = isSelected ? [%c(YTColor) white1] : [UIColor grayColor];
+            break;
+        default:  // Default style
+            imageName = isSelected ? @"notifications_selected" : @"notifications_unselected";
+            iconColor = [%c(YTColor) white1];
+            break;
     }
     NSString *imagePath = [tweakBundle pathForResource:imageName ofType:@"png" inDirectory:@"UI"];
     UIImage *image = [UIImage imageWithContentsOfFile:imagePath];
