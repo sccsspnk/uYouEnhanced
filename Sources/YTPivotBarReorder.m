@@ -18,7 +18,7 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     self.title = @"Reorder Pivot Bar Icons";
-    self.view.backgroundColor = [UIColor systemBackgroundColor];
+    self.view.backgroundColor = [UIColor colorWithRed:0.129 green:0.129 blue:0.129 alpha:1.0];
     
     UIBarButtonItem *closeButton = [[UIBarButtonItem alloc] initWithTitle:@"Close" style:UIBarButtonItemStyleDone target:self action:@selector(closeController)];
     self.navigationItem.rightBarButtonItem = closeButton;
@@ -33,6 +33,7 @@
     self.collectionView.dragDelegate = self;
     self.collectionView.dropDelegate = self;
     self.collectionView.dragInteractionEnabled = YES;
+    self.collectionView.backgroundColor = [UIColor colorWithRed:0.129 green:0.129 blue:0.129 alpha:1.0]; // Pivot bar background color
     [self.collectionView registerClass:[UICollectionViewCell class] forCellWithReuseIdentifier:@"Cell"];
     [self.view addSubview:self.collectionView];
     
@@ -67,11 +68,12 @@
 
 - (UICollectionViewCell *)collectionView:(UICollectionView *)collectionView cellForItemAtIndexPath:(NSIndexPath *)indexPath {
     UICollectionViewCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:@"Cell" forIndexPath:indexPath];
-    UILabel *label = [[UILabel alloc] initWithFrame:cell.contentView.bounds];
+    UIImageView *iconView = [[UIImageView alloc] initWithFrame:cell.contentView.bounds];
     YTIPivotBarItemRenderer *itemRenderer = self.pivotBarItems[indexPath.row];
-    label.text = itemRenderer.title.string;
-    label.textAlignment = NSTextAlignmentCenter;
-    [cell.contentView addSubview:label];
+    iconView.image = itemRenderer.icon;
+    iconView.tintColor = [UIColor whiteColor];
+    iconView.contentMode = UIViewContentModeScaleAspectFit;
+    [cell.contentView addSubview:iconView];
     return cell;
 }
 
@@ -102,8 +104,6 @@
 }
 
 - (YTIGuideResponse *)getGuideResponse {
-    // Implement method to get the YTIGuideResponse
-    // For now, returning nil
     return nil;
 }
 
