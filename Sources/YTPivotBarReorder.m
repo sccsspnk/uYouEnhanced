@@ -78,12 +78,6 @@
     return cell;
 }
 
-- (UIImage *)imageFromYTIIcon:(YTIIcon *)icon {
-    NSURL *url = [NSURL URLWithString:icon.iconURLString];
-    NSData *data = [NSData dataWithContentsOfURL:url];
-    return [UIImage imageWithData:data];
-}
-
 - (NSArray<UIDragItem *> *)collectionView:(UICollectionView *)collectionView itemsForBeginningDragSession:(id<UIDragSession>)session atIndexPath:(NSIndexPath *)indexPath {
     NSItemProvider *itemProvider = [[NSItemProvider alloc] initWithObject:self.pivotBarItems[indexPath.row]];
     UIDragItem *dragItem = [[UIDragItem alloc] initWithItemProvider:itemProvider];
