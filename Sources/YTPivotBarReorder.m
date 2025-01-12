@@ -1,5 +1,10 @@
 #import "YTPivotBarReorder.h"
 #import "uYouPlus.h"
+#import <YouTubeHeader/YTIGuideResponse.h>
+#import <YouTubeHeader/YTIGuideResponseSupportedRenderers.h>
+#import <YouTubeHeader/YTIPivotBarRenderer.h>
+#import <YouTubeHeader/YTIPivotBarSupportedRenderers.h>
+#import <YouTubeHeader/YTIPivotBarItemRenderer.h>
 
 @interface YTPivotBarReorder ()
 
@@ -28,7 +33,25 @@
     [self.collectionView registerClass:[UICollectionViewCell class] forCellWithReuseIdentifier:@"Cell"];
     [self.view addSubview:self.collectionView];
     
-    self.pivotBarItems = [@[@"Home", @"Shorts", @"Subscriptions", @"Notifications", @"Library"] mutableCopy];
+    [self loadActivePivotTabs];
+}
+
+- (void)loadActivePivotTabs {
+    // Assuming we have a method to get the YTIGuideResponse
+    YTIGuideResponse *guideResponse = [self getGuideResponse];
+    NSMutableArray *activeTabs = [NSMutableArray array];
+    
+    for (YTIGuideResponseSupportedRenderers *guideRenderers in [guideResponse itemsArray]) {
+        YTIPivotBarRenderer *pivotBarRenderer = [guideRenderers pivotBarRenderer];
+        for (YTIPivotBarSupportedRenderers *renderer in [pivotBarRenderer itemsArray]) {
+            YTIPivotBarItemRenderer *itemRenderer = [renderer pivotBarItemRenderer];
+            NSString *title = [[itemRenderer title] string];
+            [activeTabs addObject:title];
+        }
+    }
+    
+    self.pivotBarItems = activeTabs;
+    [self.collectionView reloadData];
 }
 
 - (NSInteger)collectionView:(UICollectionView *)collectionView numberOfItemsInSection:(NSInteger)section {
@@ -68,6 +91,12 @@
             } completion:nil];
         }
     }
+}
+
+- (YTIGuideResponse *)getGuideResponse {
+    // Implement method to get the YTIGuideResponse
+    // For now, returning nil
+    return nil;
 }
 
 @end
