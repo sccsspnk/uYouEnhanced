@@ -5,6 +5,7 @@
 #import <YouTubeHeader/YTIPivotBarRenderer.h>
 #import <YouTubeHeader/YTIPivotBarSupportedRenderers.h>
 #import <YouTubeHeader/YTIPivotBarItemRenderer.h>
+#import <YouTubeHeader/YTIIcon.h>
 
 @interface YTPivotBarReorder ()
 
@@ -24,7 +25,7 @@
     self.navigationItem.rightBarButtonItem = closeButton;
     
     UICollectionViewFlowLayout *layout = [[UICollectionViewFlowLayout alloc] init];
-    layout.itemSize = CGSizeMake(100, 100);
+    layout.itemSize = CGSizeMake(80, 80);
     layout.scrollDirection = UICollectionViewScrollDirectionHorizontal;
     
     self.collectionView = [[UICollectionView alloc] initWithFrame:self.view.bounds collectionViewLayout:layout];
@@ -33,7 +34,7 @@
     self.collectionView.dragDelegate = self;
     self.collectionView.dropDelegate = self;
     self.collectionView.dragInteractionEnabled = YES;
-    self.collectionView.backgroundColor = [UIColor colorWithRed:0.129 green:0.129 blue:0.129 alpha:1.0]; // Pivot bar background color
+    self.collectionView.backgroundColor = [UIColor colorWithRed:0.129 green:0.129 blue:0.129 alpha:1.0];
     [self.collectionView registerClass:[UICollectionViewCell class] forCellWithReuseIdentifier:@"Cell"];
     [self.view addSubview:self.collectionView];
     
@@ -52,7 +53,7 @@
         YTIPivotBarRenderer *pivotBarRenderer = [guideRenderers pivotBarRenderer];
         for (YTIPivotBarSupportedRenderers *renderer in [pivotBarRenderer itemsArray]) {
             YTIPivotBarItemRenderer *itemRenderer = [renderer pivotBarItemRenderer];
-            if (itemRenderer) {
+            if (itemRenderer && itemRenderer.isVisible) {
                 [activeTabs addObject:itemRenderer];
             }
         }
@@ -70,11 +71,19 @@
     UICollectionViewCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:@"Cell" forIndexPath:indexPath];
     UIImageView *iconView = [[UIImageView alloc] initWithFrame:cell.contentView.bounds];
     YTIPivotBarItemRenderer *itemRenderer = self.pivotBarItems[indexPath.row];
-    iconView.image = itemRenderer.icon;
+    iconView.image = [self imageFromYTIIcon:itemRenderer.icon];
     iconView.tintColor = [UIColor whiteColor];
     iconView.contentMode = UIViewContentModeScaleAspectFit;
     [cell.contentView addSubview:iconView];
     return cell;
+}
+
+- (UIImage *)imageFromYTIIcon:(YTIIcon *)icon {
+    // Implement the conversion from YTIIcon to UIImage
+    // This is a placeholder implementation and should be replaced with actual conversion logic
+    NSURL *url = [NSURL URLWithString:icon.iconURL];
+    NSData *data = [NSData dataWithContentsOfURL:url];
+    return [UIImage imageWithData:data];
 }
 
 - (NSArray<UIDragItem *> *)collectionView:(UICollectionView *)collectionView itemsForBeginningDragSession:(id<UIDragSession>)session atIndexPath:(NSIndexPath *)indexPath {
