@@ -38,7 +38,7 @@ static BOOL useInboxStyle() {
     NSString *imageName;
     UIColor *iconColor;
     if (useThinOutlineStyle()) {
-        imageName = isSelected ? @"notifications_selected" : @"notifications_unselected_24pt";
+        imageName = isSelected ? @"notifications_selected" : @"notifications_24pt";
         iconColor = [%c(YTColor) white1];
     } else if (usePre2020Style()) {
         imageName = @"notifications_selected";
