@@ -52,6 +52,8 @@ static BOOL useInboxStyle() {
     }
     NSString *imagePath = [tweakBundle pathForResource:imageName ofType:@"png" inDirectory:@"UI"];
     UIImage *image = [UIImage imageWithContentsOfFile:imagePath];
+    CGSize newSize = CGSizeMake(24, 24);
+    image = resizeImage(image, newSize);
     image = [%c(QTMIcon) tintImage:image color:iconColor];
     return type == YT_NOTIFICATIONS ? image : %orig;
 }
