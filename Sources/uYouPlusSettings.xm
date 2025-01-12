@@ -64,20 +64,6 @@ SWITCH3(
 );
 */
 
-// Notifications Tab
-static BOOL useDefaultStyle() {
-    return IS_ENABLED(@"enableNotificationIconStyle") && getNotificationIconStyle() == 0;
-}
-static BOOL useThinOutlineStyle() {
-    return IS_ENABLED(@"enableNotificationIconStyle") && getNotificationIconStyle() == 1;
-}
-static BOOL usePre2020Style() {
-    return IS_ENABLED(@"enableNotificationIconStyle") && getNotificationIconStyle() == 2;
-}
-static BOOL useInboxStyle() {
-    return IS_ENABLED(@"enableNotificationIconStyle") && getNotificationIconStyle() == 3;
-}
-// Cache
 static NSString *GetCacheSize() { // YTLite - @dayanch96
     NSString *cachePath = NSSearchPathForDirectoriesInDomains(NSCachesDirectory, NSUserDomainMask, YES).firstObject;
     NSArray *filesArray = [[NSFileManager defaultManager] subpathsOfDirectoryAtPath:cachePath error:nil];
