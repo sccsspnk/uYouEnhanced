@@ -65,27 +65,27 @@ static int getNotificationIconStyle() {
 %hook YTPivotBarView
 - (void)setRenderer:(YTIPivotBarRenderer *)renderer {
     @try {
-        YTIBrowseEndpoint *endPoint = [[%c(YTIBrowseEndpoint) alloc] init];
-        [endPoint setBrowseId:@"FEnotifications_inbox"];
-        YTICommand *command = [[%c(YTICommand) alloc] init];
-        [command setBrowseEndpoint:endPoint];
+	YTIBrowseEndpoint *endPoint = [[%c(YTIBrowseEndpoint) alloc] init];
+	[endPoint setBrowseId:@"FEnotifications_inbox"];
+	YTICommand *command = [[%c(YTICommand) alloc] init];
+	[command setBrowseEndpoint:endPoint];
 
-        YTIPivotBarItemRenderer *itemBar = [[%c(YTIPivotBarItemRenderer) alloc] init];
-        [itemBar setPivotIdentifier:@"FEnotifications_inbox"];
-        YTIIcon *icon = [itemBar icon];
-        [icon setIconType:YT_NOTIFICATIONS];
-        [itemBar setNavigationEndpoint:command];
+	YTIPivotBarItemRenderer *itemBar = [[%c(YTIPivotBarItemRenderer) alloc] init];
+	[itemBar setPivotIdentifier:@"FEnotifications_inbox"];
+	YTIIcon *icon = [itemBar icon];
+	[icon setIconType:YT_NOTIFICATIONS];
+	[itemBar setNavigationEndpoint:command];
 
-        YTIFormattedString *formatString;
-        if (useInboxStyle()) {
-            formatString = [%c(YTIFormattedString) formattedStringWithString:@"Inbox"];
-        } else {
-            formatString = [%c(YTIFormattedString) formattedStringWithString:@"Notifications"];
-        }
-        [itemBar setTitle:formatString];
+	YTIFormattedString *formatString;
+	if (getNotificationIconStyle() == 3) {
+		formatString = [%c(YTIFormattedString) formattedStringWithString:@"Inbox"];
+	} else {
+		formatString = [%c(YTIFormattedString) formattedStringWithString:@"Notifications"];
+	}
+	[itemBar setTitle:formatString];
 
-        YTIPivotBarSupportedRenderers *barSupport = [[%c(YTIPivotBarSupportedRenderers) alloc] init];
-        [barSupport setPivotBarItemRenderer:itemBar];
+	YTIPivotBarSupportedRenderers *barSupport = [[%c(YTIPivotBarSupportedRenderers) alloc] init];
+	[barSupport setPivotBarItemRenderer:itemBar];
 
         NSPredicate *predicate = [NSPredicate predicateWithBlock:^BOOL(id evaluatedObject, NSDictionary *bindings) {
             if ([evaluatedObject isKindOfClass:[YTIPivotBarSupportedRenderers class]]) {
