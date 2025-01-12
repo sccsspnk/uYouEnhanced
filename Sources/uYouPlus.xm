@@ -53,7 +53,7 @@ static BOOL useInboxStyle() {
     NSString *imagePath = [tweakBundle pathForResource:imageName ofType:@"png" inDirectory:@"UI"];
     UIImage *image = [UIImage imageWithContentsOfFile:imagePath];
     image = [%c(QTMIcon) tintImage:image color:iconColor];
-    return type == 1 ? image : %orig;
+    return type == YT_NOTIFICATIONS ? image : %orig;
 }
 %end
 %hook YTPivotBarView
