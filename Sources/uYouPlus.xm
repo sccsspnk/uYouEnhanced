@@ -88,7 +88,20 @@ static BOOL useInboxStyle() {
         YTIPivotBarSupportedRenderers *barSupport = [[%c(YTIPivotBarSupportedRenderers) alloc] init];
         [barSupport setPivotBarItemRenderer:itemBar];
 
-        [renderer.itemsArray addObject:barSupport];
+        NSPredicate *predicate = [NSPredicate predicateWithBlock:^BOOL(id evaluatedObject, NSDictionary *bindings) {
+            if ([evaluatedObject isKindOfClass:[YTIPivotBarSupportedRenderers class]]) {
+                YTIPivotBarSupportedRenderers *renderer = (YTIPivotBarSupportedRenderers *)evaluatedObject;
+                return [[renderer.pivotBarItemRenderer pivotIdentifier] isEqualToString:@"FEnotifications_inbox"];
+            }
+            return NO;
+        }];
+        NSArray *filteredArray = [renderer.itemsArray filteredArrayUsingPredicate:predicate];
+        if (filteredArray.count > 0) {
+            [renderer.itemsArray removeObjectsInArray:filteredArray];
+        }
+        NSUInteger insertIndex = MIN(4, renderer.itemsArray.count);
+        [renderer.itemsArray insertObject:barSupport atIndex:insertIndex];
+
     } @catch (NSException *exception) {
         NSLog(@"Error setting renderer: %@", exception.reason);
     }
