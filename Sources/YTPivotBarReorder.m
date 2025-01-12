@@ -20,6 +20,9 @@
     self.title = @"Reorder Pivot Bar Icons";
     self.view.backgroundColor = [UIColor systemBackgroundColor];
     
+    UIBarButtonItem *closeButton = [[UIBarButtonItem alloc] initWithTitle:@"Close" style:UIBarButtonItemStyleDone target:self action:@selector(closeController)];
+    self.navigationItem.rightBarButtonItem = closeButton;
+    
     UICollectionViewFlowLayout *layout = [[UICollectionViewFlowLayout alloc] init];
     layout.itemSize = CGSizeMake(100, 100);
     layout.scrollDirection = UICollectionViewScrollDirectionHorizontal;
@@ -36,8 +39,11 @@
     [self loadActivePivotTabs];
 }
 
+- (void)closeController {
+    [self dismissViewControllerAnimated:YES completion:nil];
+}
+
 - (void)loadActivePivotTabs {
-    // Assuming we have a method to get the YTIGuideResponse
     YTIGuideResponse *guideResponse = [self getGuideResponse];
     NSMutableArray *activeTabs = [NSMutableArray array];
     
@@ -45,7 +51,9 @@
         YTIPivotBarRenderer *pivotBarRenderer = [guideRenderers pivotBarRenderer];
         for (YTIPivotBarSupportedRenderers *renderer in [pivotBarRenderer itemsArray]) {
             YTIPivotBarItemRenderer *itemRenderer = [renderer pivotBarItemRenderer];
-            [activeTabs addObject:itemRenderer];
+            if (itemRenderer) {
+                [activeTabs addObject:itemRenderer];
+            }
         }
     }
     
@@ -60,7 +68,8 @@
 - (UICollectionViewCell *)collectionView:(UICollectionView *)collectionView cellForItemAtIndexPath:(NSIndexPath *)indexPath {
     UICollectionViewCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:@"Cell" forIndexPath:indexPath];
     UILabel *label = [[UILabel alloc] initWithFrame:cell.contentView.bounds];
-    label.text = [self.pivotBarItems[indexPath.row] string];
+    YTIPivotBarItemRenderer *itemRenderer = self.pivotBarItems[indexPath.row];
+    label.text = itemRenderer.title.string;
     label.textAlignment = NSTextAlignmentCenter;
     [cell.contentView addSubview:label];
     return cell;
