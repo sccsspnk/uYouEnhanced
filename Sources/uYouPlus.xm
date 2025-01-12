@@ -18,6 +18,14 @@ NSBundle *tweakBundle = uYouPlusBundle();
 //
 
 // Notifications Tab appearance
+UIImage *resizeImage(UIImage *image, CGSize newSize) {
+    UIGraphicsBeginImageContextWithOptions(newSize, NO, 0.0);
+    [image drawInRect:CGRectMake(0, 0, newSize.width, newSize.height)];
+    UIImage *resizedImage = UIGraphicsGetImageFromCurrentImageContext();
+    UIGraphicsEndImageContext();
+    return resizedImage;
+}
+
 static int getNotificationIconStyle() {
     return [[NSUserDefaults standardUserDefaults] integerForKey:@"notificationIconStyle"];
 }
