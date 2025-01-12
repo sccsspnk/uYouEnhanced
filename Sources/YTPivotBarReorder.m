@@ -45,7 +45,7 @@
         YTIPivotBarRenderer *pivotBarRenderer = [guideRenderers pivotBarRenderer];
         for (YTIPivotBarSupportedRenderers *renderer in [pivotBarRenderer itemsArray]) {
             YTIPivotBarItemRenderer *itemRenderer = [renderer pivotBarItemRenderer];
-            NSString *title = [[itemRenderer title] string];
+            NSString *title = itemRenderer.title;
             [activeTabs addObject:title];
         }
     }
