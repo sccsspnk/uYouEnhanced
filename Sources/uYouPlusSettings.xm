@@ -950,7 +950,7 @@ NSString *cacheDescription = [NSString stringWithFormat:@"%@", GetCacheSize()];
                 SPOOFER_VERSION(@"v19.43.2", 7),
                 SPOOFER_VERSION(@"v19.42.1", 8),
                 SPOOFER_VERSION(@"v19.41.3", 9),
-                SPOOFER_VERSION(@"v19.40.4", 10)
+                SPOOFER_VERSION(@"v19.40.4", 10),
                 SPOOFER_VERSION(@"v19.39.1", 11),
                 SPOOFER_VERSION(@"v19.38.2", 12),
                 SPOOFER_VERSION(@"v19.37.2", 13),
