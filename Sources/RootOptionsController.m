@@ -103,7 +103,7 @@
             cell.imageView.image = [UIImage systemImageNamed:@"drop.fill"];
         }
         if (indexPath.row == 2) {
-            cell.textLabel.text = @"Reorder Pivot Bar Icons";
+            cell.textLabel.text = @"Reorder Notifications Bar";
             cell.detailTextLabel.text = @"";
             cell.imageView.image = [UIImage systemImageNamed:@"rectangle.grid.1x2.fill"];
         }
@@ -174,7 +174,7 @@
         if (indexPath.row == 2) {
             ReorderNotificationsBar *reorderNotificationsBarController = [[ReorderNotificationsBar alloc] init];
             UINavigationController *reorderNotificationsBarControllerView = [[UINavigationController alloc] initWithRootViewController:reorderNotificationsBarController];
-            pivotBarReorderControllerView.modalPresentationStyle = UIModalPresentationFullScreen;
+            reorderNotificationsBarControllerView.modalPresentationStyle = UIModalPresentationFullScreen;
 
             [self presentViewController:reorderNotificationsBarControllerView animated:YES completion:nil];
         }
