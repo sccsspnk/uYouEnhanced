@@ -107,7 +107,6 @@
 
 - (UICollectionViewCell *)collectionView:(UICollectionView *)collectionView cellForItemAtIndexPath:(NSIndexPath *)indexPath {
     UICollectionViewCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:@"Cell" forIndexPath:indexPath];
-    YTIPivotBarItemRenderer *itemRenderer = self.pivotBarItems[indexPath.row];
     
     UILabel *indexLabel = [[UILabel alloc] initWithFrame:cell.contentView.bounds];
     indexLabel.text = [NSString stringWithFormat:@"%ld", (long)indexPath.row + 1];
