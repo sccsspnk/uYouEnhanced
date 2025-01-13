@@ -172,11 +172,11 @@
             [self presentViewController:colourOptionsController2View animated:YES completion:nil];
         }
         if (indexPath.row == 2) {
-            YTPivotBarReorder *pivotBarReorderController = [[YTPivotBarReorder alloc] init];
-            UINavigationController *pivotBarReorderControllerView = [[UINavigationController alloc] initWithRootViewController:pivotBarReorderController];
+            ReorderNotificationsBar *reorderNotificationsBarController = [[ReorderNotificationsBar alloc] init];
+            UINavigationController *reorderNotificationsBarControllerView = [[UINavigationController alloc] initWithRootViewController:reorderNotificationsBarController];
             pivotBarReorderControllerView.modalPresentationStyle = UIModalPresentationFullScreen;
 
-            [self presentViewController:pivotBarReorderControllerView animated:YES completion:nil];
+            [self presentViewController:reorderNotificationsBarControllerView animated:YES completion:nil];
         }
     }
     if (indexPath.section == 1) {
