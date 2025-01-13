@@ -1,7 +1,7 @@
 #import "RootOptionsController.h"
 #import "ColourOptionsController.h"
 #import "ColourOptionsController2.h"
-#import "YTPivotBarReorder.h"
+#import "ReorderNotificationsBar.h"
 
 @interface RootOptionsController ()
 
