@@ -1,4 +1,4 @@
-#import "YTPivotBarReorder.h"
+#import "ReorderNotificationsBar.h"
 #import "uYouPlus.h"
 #import <YouTubeHeader/YTIGuideResponse.h>
 #import <YouTubeHeader/YTIGuideResponseSupportedRenderers.h>
@@ -6,7 +6,7 @@
 #import <YouTubeHeader/YTIPivotBarSupportedRenderers.h>
 #import <YouTubeHeader/YTIPivotBarItemRenderer.h>
 
-@interface YTPivotBarReorder ()
+@interface ReorderNotificationsBar ()
 
 @property (strong, nonatomic) UICollectionView *collectionView;
 @property (strong, nonatomic) NSMutableArray *pivotBarItems;
@@ -15,7 +15,7 @@
 
 @end
 
-@implementation YTPivotBarReorder
+@implementation ReorderNotificationsBar
 
 - (void)viewDidLoad {
     [super viewDidLoad];
@@ -95,7 +95,7 @@
 - (void)reorderPivotTabToIndex:(NSUInteger)index {
     if (index >= self.pivotBarItems.count) return;
 
-    YTIPivotBarItemRenderer *selectedItem = self.pivotBarItems[0]; // Assuming the first item is the one to reorder
+    YTIPivotBarItemRenderer *selectedItem = self.pivotBarItems[0];
     [self.pivotBarItems removeObjectAtIndex:0];
     [self.pivotBarItems insertObject:selectedItem atIndex:index];
     [self.collectionView reloadData];
