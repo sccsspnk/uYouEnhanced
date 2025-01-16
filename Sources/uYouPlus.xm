@@ -1358,17 +1358,22 @@ static int contrastMode() {
 // Hide Fullscreen Button - @arichornlover
 %group gHideFullscreenButton
 %hook YTInlinePlayerBarContainerView
-- (BOOL)fullscreenButtonDisabled { return YES; }
-- (BOOL)canShowFullscreenButton { return NO; }
-- (BOOL)canShowFullscreenButtonExperimental { return NO; }
-// - (void)setFullscreenButtonDisabled:(BOOL) // Might implement this if useful - @arichornlover
-- (void)layoutSubviews {
-    %orig;
-    if (self.exitFullscreenButton && !self.exitFullscreenButton.hidden) {
-        self.exitFullscreenButton.hidden = YES;
-    }
-    if (self.enterFullscreenButton && !self.enterFullscreenButton.hidden) {
+- (void)hideFullscreenButton {
+    if (self.enterFullscreenButton) {
         self.enterFullscreenButton.hidden = YES;
+        [self.enterFullscreenButton removeFromSuperview];
+    }
+    if (self.exitFullscreenButton) {
+        self.exitFullscreenButton.hidden = YES;
+        [self.exitFullscreenButton removeFromSuperview];
+    }
+    [self setNeedsUpdateConstraints];
+    [self updateConstraintsIfNeeded];
+}
+- (void)didMoveToWindow {
+    %orig;
+    if (IS_ENABLED(kDisableFullscreenButton)) {
+        [self hideFullscreenButton];
     }
 }
 %end
