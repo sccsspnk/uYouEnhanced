@@ -17,34 +17,6 @@ NSBundle *uYouPlusBundle() {
 NSBundle *tweakBundle = uYouPlusBundle();
 //
 
-// activities API
-@import ActivityKit;
-
-@interface NoActivityAttributes : NSObject <ActivityAttributes>
-@end
-
-@implementation NoActivityAttributes
-@end
-
-NoActivityAttributes *attributes = [[NoActivityAttributes alloc] init];
-Activity<NoActivityAttributes *> *activity = [Activity<ActivityContent<NoActivityAttributes *> > createActivityWithAttributes:attributes];
-
-[activity startWithContent:[[ActivityContent alloc] init] completion:^(NSError * _Nullable error) {
-    if (error) {
-        NSLog(@"Failed to start Live Activity: %@", error);
-    } else {
-        NSLog(@"Live Activity started successfully");
-    }
-}];
-
-[activity endWithCompletion:^(NSError * _Nullable error) {
-    if (error) {
-        NSLog(@"Failed to end Live Activity: %@", error);
-    } else {
-        NSLog(@"Live Activity ended successfully");
-    }
-}];
-
 // Notifications Tab appearance
 UIImage *resizeImage(UIImage *image, CGSize newSize) {
     UIGraphicsBeginImageContextWithOptions(newSize, NO, 0.0);
