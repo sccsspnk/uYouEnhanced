@@ -17,6 +17,31 @@ NSBundle *uYouPlusBundle() {
 NSBundle *tweakBundle = uYouPlusBundle();
 //
 
+// Disable Live Activities (iOS 16+)
+NSString *bundleIdentifier = [[NSBundle mainBundle] bundleIdentifier];
+
+if (@available(iOS 16.0, *)) {
+    if (![bundleIdentifier isEqualToString:@"com.google.ios.youtube"]) {
+        Activity *activity = [[Activity alloc] initWithActivityType:@"com.google.ios.youtube.liveactivity"];
+        [activity setContent:yourActivityContent];
+        
+        [Activity startActivity:activity completionHandler:^(BOOL success, NSError * _Nullable error) {
+        }];
+        
+        [activity updateContent:updatedActivityContent];
+        
+        [activity endActivity];
+    } else {
+        NSLog(@"Live activities are disabled for the YouTube app.");
+
+        [UIApplication sharedApplication].applicationSupportsShakeToEdit = NO;
+        [[UIApplication sharedApplication] setIdleTimerDisabled:YES];
+        NSLog(@"Dynamic Island notifications are disabled for the YouTube app.");
+    }
+} else {
+    NSLog(@"Live activities and Dynamic Island notifications are not applicable.");
+}
+
 // Notifications Tab appearance
 UIImage *resizeImage(UIImage *image, CGSize newSize) {
     UIGraphicsBeginImageContextWithOptions(newSize, NO, 0.0);
