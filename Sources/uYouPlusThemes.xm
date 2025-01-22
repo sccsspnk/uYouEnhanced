@@ -85,7 +85,7 @@
 %hook YTAsyncCollectionView
 - (void)didMoveToWindow {
     %orig;
-    self.superview.backgroundColor = [UIColor colorWithRed:0.129 green:0.129 blue:0.129 alpha:1.0];
+    self.backgroundColor = [UIColor colorWithRed:0.129 green:0.129 blue:0.129 alpha:1.0];
 }
 %end
 %end
