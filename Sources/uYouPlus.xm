@@ -17,6 +17,7 @@ NSBundle *uYouPlusBundle() {
 NSBundle *tweakBundle = uYouPlusBundle();
 //
 
+/*
 // Disable Live Activities (iOS 16+)
 @implementation CustomDisableLiveActivities : NSObject
 - (void)disableLiveActivitiesAndDynamicIsland {
@@ -47,6 +48,7 @@ NSBundle *tweakBundle = uYouPlusBundle();
     [self disableLiveActivitiesAndDynamicIsland];
 }
 @end
+*/
 
 // Notifications Tab appearance
 UIImage *resizeImage(UIImage *image, CGSize newSize) {
