@@ -18,29 +18,36 @@ NSBundle *tweakBundle = uYouPlusBundle();
 //
 
 // Disable Live Activities (iOS 16+)
-NSString *bundleIdentifier = [[NSBundle mainBundle] bundleIdentifier];
-
-if (@available(iOS 16.0, *)) {
-    if (![bundleIdentifier isEqualToString:@"com.google.ios.youtube"]) {
-        Activity *activity = [[Activity alloc] initWithActivityType:@"com.google.ios.youtube.liveactivity"];
-        [activity setContent:yourActivityContent];
-        
-        [Activity startActivity:activity completionHandler:^(BOOL success, NSError * _Nullable error) {
-        }];
-        
-        [activity updateContent:updatedActivityContent];
-        
-        [activity endActivity];
+// Ensure this is placed within your class implementation
+@implementation CustomDisableLiveActivities
+- (void)disableLiveActivitiesAndDynamicIsland {
+    NSString *bundleIdentifier = [[NSBundle mainBundle] bundleIdentifier];
+    if (@available(iOS 16.0, *)) {
+        if (![bundleIdentifier isEqualToString:@"com.google.ios.youtube"]) {
+            NSLog(@"Handling Live Activities for a different app...");
+            if ([NSClassFromString(@"Activity") respondsToSelector:NSSelectorFromString(@"currentActivity")]) {
+                id activity = [NSClassFromString(@"Activity") performSelector:NSSelectorFromString(@"currentActivity")];
+                [activity performSelector:NSSelectorFromString(@"setContent:") withObject:yourActivityContent];
+                [activity performSelector:NSSelectorFromString(@"updateContent:") withObject:updatedActivityContent];
+                [activity performSelector:NSSelectorFromString(@"endActivity")];
+            } else {
+                NSLog(@"Activity class or methods not found.");
+            }
+        } else {
+            NSLog(@"Live activities are disabled for the YouTube app.");
+            [UIApplication sharedApplication].applicationSupportsShakeToEdit = NO;
+            [[UIApplication sharedApplication] setIdleTimerDisabled:YES];
+            NSLog(@"Dynamic Island notifications are disabled for the YouTube app.");
+        }
     } else {
-        NSLog(@"Live activities are disabled for the YouTube app.");
-
-        [UIApplication sharedApplication].applicationSupportsShakeToEdit = NO;
-        [[UIApplication sharedApplication] setIdleTimerDisabled:YES];
-        NSLog(@"Dynamic Island notifications are disabled for the YouTube app.");
+        NSLog(@"Live activities and Dynamic Island notifications are not applicable.");
     }
-} else {
-    NSLog(@"Live activities and Dynamic Island notifications are not applicable.");
 }
+- (void)viewDidLoad {
+    [super viewDidLoad];
+    [self disableLiveActivitiesAndDynamicIsland];
+}
+@end
 
 // Notifications Tab appearance
 UIImage *resizeImage(UIImage *image, CGSize newSize) {
