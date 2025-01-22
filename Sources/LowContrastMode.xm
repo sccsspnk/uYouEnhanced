@@ -16,7 +16,7 @@ static BOOL customContrastMode() {
 
 UIColor *lcmHexColor;
 
-%group gLowContrastMode // Low Contrast Mode v1.6.1 (Compatible with only YouTube v17.33.2-v18.34.5)
+%group gLowContrastMode // Low Contrast Mode v1.6.2 (Compatible with only YouTube v17.33.2-v18.34.5)
 %hook UIColor
 + (UIColor *)whiteColor { // Dark Theme Color
          return [UIColor colorWithRed: 0.56 green: 0.56 blue: 0.56 alpha: 1.00];
@@ -131,91 +131,6 @@ UIColor *lcmHexColor;
     return [UIColor whiteColor];
 }
 %end
-%hook _ASDisplayView
-- (void)layoutSubviews {
-    %orig; 
-    for (UIView *subview in self.subviews) {
-        if ([subview.accessibilityLabel isEqualToString:@"connect account"]) {
-            subview.backgroundColor = [UIColor whiteColor];
-            if ([subview isKindOfClass:[UILabel class]]) {
-                UILabel *label = (UILabel *)subview;
-                label.textColor = [UIColor blackColor];
-            }
-        } else if ([subview.accessibilityLabel isEqualToString:@"Thanks"]) {
-            subview.backgroundColor = [UIColor whiteColor];
-            if ([subview isKindOfClass:[UILabel class]]) {
-                UILabel *label = (UILabel *)subview;
-                label.textColor = [UIColor blackColor];
-            }
-        } else if ([subview.accessibilityLabel isEqualToString:@"Save to playlist"]) {
-            subview.backgroundColor = [UIColor whiteColor];
-            if ([subview isKindOfClass:[UILabel class]]) {
-                UILabel *label = (UILabel *)subview;
-                label.textColor = [UIColor blackColor];
-            }
-        } else if ([subview.accessibilityLabel isEqualToString:@"Report"]) {
-            subview.backgroundColor = [UIColor whiteColor];
-            if ([subview isKindOfClass:[UILabel class]]) {
-                UILabel *label = (UILabel *)subview;
-                label.textColor = [UIColor blackColor];
-            }
-        }
-    }
-}
-%end
-%hook QTMColorGroup
-- (UIColor *)tint100 {
-    return [UIColor whiteColor];
-}
-- (UIColor *)tint300 {
-    return [UIColor whiteColor];
-}
-- (UIColor *)tint500 {
-    return [UIColor whiteColor];
-}
-- (UIColor *)tint700 {
-    return [UIColor whiteColor];
-}
-- (UIColor *)accent200 {
-    return [UIColor whiteColor];
-}
-- (UIColor *)accent400 {
-    return [UIColor whiteColor];
-}
-- (UIColor *)accentColor {
-    return [UIColor whiteColor];
-}
-- (UIColor *)brightAccentColor {
-    return [UIColor whiteColor];
-}
-- (UIColor *)regularColor {
-    return [UIColor whiteColor];
-}
-- (UIColor *)darkerColor {
-    return [UIColor whiteColor];
-}
-- (UIColor *)bodyTextColor {
-    return [UIColor whiteColor];
-}
-- (UIColor *)lightBodyTextColor {
-    return [UIColor whiteColor];
-}
-- (UIColor *)bodyTextColorOnRegularColor {
-    return [UIColor whiteColor];
-}
-- (UIColor *)bodyTextColorOnLighterColor {
-    return [UIColor whiteColor];
-}
-- (UIColor *)bodyTextColorOnDarkerColor {
-    return [UIColor whiteColor];
-}
-- (UIColor *)bodyTextColorOnAccentColor {
-    return [UIColor whiteColor];
-}
-- (UIColor *)buttonBackgroundColor {
-    return [UIColor whiteColor];
-}
-%end
 %hook YCHLiveChatLabel
 - (NSAttributedString *)attributedText {
     NSAttributedString *originalAttributedString = %orig;
@@ -229,24 +144,6 @@ UIColor *lcmHexColor;
     UIImage *currentImage = [image imageWithRenderingMode:UIImageRenderingModeAlwaysTemplate];
     [self setTintColor:[UIColor whiteColor]];
     %orig(currentImage);
-}
-%end
-%hook UIExtendedSRGColorSpace
-- (void)setTextColor:(UIColor *)textColor {
-    textColor = [[UIColor whiteColor] colorWithAlphaComponent:0.9];
-    %orig();
-}
-%end
-%hook UIExtendedSRGBColorSpace
-- (void)setTextColor:(UIColor *)textColor {
-    textColor = [[UIColor whiteColor] colorWithAlphaComponent:1.0];
-    %orig();
-}
-%end
-%hook UIExtendedGrayColorSpace
-- (void)setTextColor:(UIColor *)textColor {
-    textColor = [[UIColor whiteColor] colorWithAlphaComponent:1.0];
-    %orig();
 }
 %end
 %hook VideoTitleLabel
@@ -339,6 +236,13 @@ UIColor *lcmHexColor;
     NSMutableAttributedString *newAttributedString = [originalAttributedString mutableCopy];
     [newAttributedString addAttribute:NSForegroundColorAttributeName value:[UIColor whiteColor] range:NSMakeRange(0, newAttributedString.length)];
     return newAttributedString;
+}
+- (BOOL)textColorFollowsTintColor {
+    return YES;
+}
+- (void)setPlaceholderColor:(UIColor *)placeholderColor {
+    placeholderColor = [UIColor whiteColor];
+    %orig(placeholderColor);
 }
 %end
 %hook ASTextFieldNode
