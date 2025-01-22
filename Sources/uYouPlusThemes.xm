@@ -81,6 +81,13 @@
     self.subviews[0].backgroundColor = [UIColor clearColor];
 }
 %end
+
+%hook YTAsyncCollectionView
+- (void)didMoveToWindow {
+    %orig;
+    self.backgroundColor = [UIColor colorWithRed:0.129 green:0.129 blue:0.129 alpha:1.0];
+}
+%end
 %end
 
 # pragma mark - OLED dark mode by BandarHL
