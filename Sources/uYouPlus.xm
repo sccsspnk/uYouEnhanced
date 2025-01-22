@@ -18,8 +18,7 @@ NSBundle *tweakBundle = uYouPlusBundle();
 //
 
 // Disable Live Activities (iOS 16+)
-// Ensure this is placed within your class implementation
-@implementation CustomDisableLiveActivities
+@implementation CustomDisableLiveActivities : NSObject
 - (void)disableLiveActivitiesAndDynamicIsland {
     NSString *bundleIdentifier = [[NSBundle mainBundle] bundleIdentifier];
     if (@available(iOS 16.0, *)) {
