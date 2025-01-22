@@ -237,13 +237,6 @@ UIColor *lcmHexColor;
     [newAttributedString addAttribute:NSForegroundColorAttributeName value:[UIColor whiteColor] range:NSMakeRange(0, newAttributedString.length)];
     return newAttributedString;
 }
-- (BOOL)textColorFollowsTintColor {
-    return YES;
-}
-- (void)setPlaceholderColor:(UIColor *)placeholderColor {
-    placeholderColor = [UIColor whiteColor];
-    %orig(placeholderColor);
-}
 %end
 %hook ASTextFieldNode
 - (void)setTextColor:(UIColor *)textColor {
@@ -258,11 +251,6 @@ UIColor *lcmHexColor;
 %hook ASButtonNode
 - (void)setTextColor:(UIColor *)textColor {
    %orig([UIColor whiteColor]);
-}
-%end
-%hook UIControl // snackbar fix for lcm
-- (UIColor *)backgroundColor {
-    return [UIColor blackColor];
 }
 %end
 %end
