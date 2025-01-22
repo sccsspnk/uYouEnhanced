@@ -17,39 +17,6 @@ NSBundle *uYouPlusBundle() {
 NSBundle *tweakBundle = uYouPlusBundle();
 //
 
-/*
-// Disable Live Activities (iOS 16+)
-@implementation CustomDisableLiveActivities : NSObject
-- (void)disableLiveActivitiesAndDynamicIsland {
-    NSString *bundleIdentifier = [[NSBundle mainBundle] bundleIdentifier];
-    if (@available(iOS 16.0, *)) {
-        if (![bundleIdentifier isEqualToString:@"com.google.ios.youtube"]) {
-            NSLog(@"Handling Live Activities for a different app...");
-            if ([NSClassFromString(@"Activity") respondsToSelector:NSSelectorFromString(@"currentActivity")]) {
-                id activity = [NSClassFromString(@"Activity") performSelector:NSSelectorFromString(@"currentActivity")];
-                [activity performSelector:NSSelectorFromString(@"setContent:") withObject:yourActivityContent];
-                [activity performSelector:NSSelectorFromString(@"updateContent:") withObject:updatedActivityContent];
-                [activity performSelector:NSSelectorFromString(@"endActivity")];
-            } else {
-                NSLog(@"Activity class or methods not found.");
-            }
-        } else {
-            NSLog(@"Live activities are disabled for the YouTube app.");
-            [UIApplication sharedApplication].applicationSupportsShakeToEdit = NO;
-            [[UIApplication sharedApplication] setIdleTimerDisabled:YES];
-            NSLog(@"Dynamic Island notifications are disabled for the YouTube app.");
-        }
-    } else {
-        NSLog(@"Live activities and Dynamic Island notifications are not applicable.");
-    }
-}
-- (void)viewDidLoad {
-    [super viewDidLoad];
-    [self disableLiveActivitiesAndDynamicIsland];
-}
-@end
-*/
-
 // Notifications Tab appearance
 UIImage *resizeImage(UIImage *image, CGSize newSize) {
     UIGraphicsBeginImageContextWithOptions(newSize, NO, 0.0);
@@ -1363,22 +1330,17 @@ static int contrastMode() {
 // Hide Fullscreen Button - @arichornlover
 %group gHideFullscreenButton
 %hook YTInlinePlayerBarContainerView
-- (void)hideFullscreenButton {
-    if (self.enterFullscreenButton) {
-        self.enterFullscreenButton.hidden = YES;
-        [self.enterFullscreenButton removeFromSuperview];
-    }
-    if (self.exitFullscreenButton) {
-        self.exitFullscreenButton.hidden = YES;
-        [self.exitFullscreenButton removeFromSuperview];
-    }
-    [self setNeedsUpdateConstraints];
-    [self updateConstraintsIfNeeded];
-}
-- (void)didMoveToWindow {
+- (BOOL)fullscreenButtonDisabled { return YES; }
+- (BOOL)canShowFullscreenButton { return NO; }
+- (BOOL)canShowFullscreenButtonExperimental { return NO; }
+// - (void)setFullscreenButtonDisabled:(BOOL) // Might implement this if useful - @arichornlover
+- (void)layoutSubviews {
     %orig;
-    if (IS_ENABLED(kDisableFullscreenButton)) {
-        [self hideFullscreenButton];
+    if (self.exitFullscreenButton && !self.exitFullscreenButton.hidden) {
+        self.exitFullscreenButton.hidden = YES;
+    }
+    if (self.enterFullscreenButton && !self.enterFullscreenButton.hidden) {
+        self.enterFullscreenButton.hidden = YES;
     }
 }
 %end
