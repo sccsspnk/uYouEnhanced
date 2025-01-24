@@ -58,6 +58,12 @@
     %orig;
     if ([self.accessibilityIdentifier isEqualToString:@"id.elements.components.comment_composer"]) { self.backgroundColor = [UIColor clearColor]; }
     if ([self.accessibilityIdentifier isEqualToString:@"id.elements.components.video_list_entry"]) { self.backgroundColor = [UIColor clearColor]; }
+    if ([self.accessibilityIdentifier isEqualToString:@"id.ui.comment_thread"]) { self.backgroundColor = [UIColor colorWithRed:0.129 green:0.129 blue:0.129 alpha:1.0]; }
+    if ([self.accessibilityIdentifier isEqualToString:@"id.elements.components.comment_composer"]) { self.backgroundColor = [UIColor colorWithRed:0.129 green:0.129 blue:0.129 alpha:1.0]; }
+    if ([self.accessibilityIdentifier isEqualToString:@"id.elements.components.filter_chip_bar"]) { self.backgroundColor = [UIColor colorWithRed:0.129 green:0.129 blue:0.129 alpha:1.0]; }
+    if ([self.accessibilityIdentifier isEqualToString:@"id.comment.guidelines_text"]) { self.superview.backgroundColor = [UIColor colorWithRed:0.129 green:0.129 blue:0.129 alpha:1.0]; }
+    if ([self.accessibilityIdentifier isEqualToString:@"id.comment.timed_comments_welcome"]) { self.superview.backgroundColor = self.backgroundColor = [UIColor colorWithRed:0.129 green:0.129 blue:0.129 alpha:1.0]; }
+    if ([self.accessibilityIdentifier isEqualToString:@"id.comment.channel_guidelines_entry_banner_container"]) { self.superview.backgroundColor = self.backgroundColor = [UIColor colorWithRed:0.129 green:0.129 blue:0.129 alpha:1.0]; }
 }
 %end
 
