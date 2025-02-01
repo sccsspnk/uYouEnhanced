@@ -55,6 +55,7 @@
 [submodule "Tweaks/YouTimeStamp"]
     path = Tweaks/YouTimeStamp
     url = https://github.com/arichornloverALT/YouTimeStamp.git
+    branch = test
 [submodule "Tweaks/YouTube-X"]
     path = Tweaks/YouTube-X
     url = https://github.com/PoomSmart/YouTube-X/
