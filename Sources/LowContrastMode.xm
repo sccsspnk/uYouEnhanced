@@ -253,6 +253,12 @@ UIColor *lcmHexColor;
    %orig([UIColor whiteColor]);
 }
 %end
+%hook YTIStringRun
+- (void)setTextColor:(unsigned int)textColor {
+    textColor = 0x8F8F8F;
+    %orig(textColor);
+}
+%end
 %end
 
 %group gCustomContrastMode // Custom Contrast Mode (Hex Color)
