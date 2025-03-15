@@ -36,8 +36,6 @@
 #import <YouTubeHeader/YTInlinePlayerBarContainerView.h>
 #import <YouTubeHeader/YTIShelfRenderer.h>
 #import <YouTubeHeader/YTIWatchNextResponse.h>
-#import <YouTubeHeader/YTPlayerOverlay.h>
-#import <YouTubeHeader/YTPlayerOverlayProvider.h>
 #import <YouTubeHeader/YTBrowseViewController.h>
 #import <YouTubeHeader/YTIPivotBarItemRenderer.h>
 #import <YouTubeHeader/YTIPivotBarRenderer.h>
@@ -70,7 +68,7 @@
 #define YT_BUNDLE_ID @"com.google.ios.youtube"
 #define YT_NAME @"YouTube"
 #define DEFAULT_RATE 1.0f // YTSpeed
-#define LOWCONTRASTMODE_CUTOFF_VERSION @"17.38.10" // LowContrastMode (v17.33.2-17.38.10)
+#define LOWCONTRASTMODE_CUTOFF_VERSION @"17.38.10" // LowContrastMode (v17.33.2-17.38.10) DEPRECATED
 
 // Keys
 // Copy/Paste Settings
