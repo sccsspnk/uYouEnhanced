@@ -18,9 +18,9 @@ static inline BOOL customContrastMode() {
     return IS_ENABLED(@"lowContrastMode_enabled") && contrastMode() == 1;
 }
 
-static inline UIColor *activeColor() {
-    return customContrastMode() && lcmHexColor ? lcmHexColor : kLowContrastColor;
-}
+// static inline UIColor *activeColor() {
+//     return customContrastMode() && lcmHexColor ? lcmHexColor : kLowContrastColor;
+// }
 
 // Low Contrast Mode v1.7.1.1 (Compatible with only YouTube v19.01.1-v20.21.6)
 %group gLowContrastMode
